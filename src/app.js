@@ -1,39 +1,47 @@
+class WebWars{
+  constructor(){
+    this.canvas = document.getElementById('canvas');
+    this.ctx = this.canvas.getContext('2d');
+    this.root = this.canvas.getBoundingClientRect();
+    this.panels = {
+      settings: {
+        width: 180,
+        height: 120
+      },
+      position: {
+        left: QuickSettings.create(this.root.left, this.root.top, 'LeftPanel')
+          .setHeight(this.canvas.height)
+          .setWidth(this.panels.settings.width),
 
-// Valores iniciales
-// gui params
-var myAngle = 30;
-var myColor = '#eeee00';
+        right: QuickSettings.create(this.root.right - panelWidth, this.root.top, 'RightPanel')
+          .setHeight(this.canvas.height)
+          .setWidth(this.panels.settings.width),
 
-var gui;
+        bottom: QuickSettings.create(this.root.left, this.root.top + this.canvas.height - panelHeight, 'BottomPanel')
+          .setHeight(this.panels.settings.height)
+          .setWidth(this.canvas.width),
 
-function setup() {
+        top: QuickSettings.create(this.root.left, this.root.top, 'TopPanel')
+          .setHeight(this.panels.settings.height)
+          .setWidth(this.canvas.width),
+      },
+    };
 
-  createCanvas(windowWidth, windowHeight);
+    this.canvas.width = 640;
+    this.canvas.height = 320;
+  }
 
-  // Create the GUI
-  // min, max, ?
-  sliderRange(0, 180, 1);
-  gui = createGui('p5.gui');
-  gui.addGlobals('myColor', 'myAngle');
+  gameLoop(){
+    requestAnimationFrame(this.gameLoop);
+  }
 
-  // Only call draw when then gui is changed
-  noLoop();
-
+  reOffset(){
+    this.root = this.canvas.getBoundingClientRect();
+  }
 }
 
-
-function draw() {
-
-  // this is a piece of cake
-  background(0);
-  fill(myColor);
-  angleMode(DEGREES);
-  arc(width/2, height/2, 100, 100, myAngle/2, 360 - myAngle/2, PIE);
-
-}
-
-
-// dynamically adjust the canvas to the window
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+window.onload = function(){
+  let Game = new WebWars();
+  Game.canvas
+  console.log(Game);
 }
