@@ -365,3 +365,69 @@ class AirUnit extends Unit{
     super();
   }
 }
+
+class TransportCopter extends AirUnit{
+  constructor(){
+    this.cost = 5000;
+    this.movement = {
+      tiles: 6,
+      type: 'air'
+    };
+    this.range = null;
+    this.ammo = null;
+    this.fuel = 99;
+    this.vision = 2;
+  }
+}
+class BattleCopter extends AirUnit{
+  constructor(){
+    this.cost = 9000;
+    this.movement = {
+      tiles: 6,
+      type: 'air'
+    };
+    this.range = 1;
+    this.ammo = 6;
+    this.fuel = 99;
+    this.vision = 3;
+  }
+}
+class Fighter extends AirUnit{
+  constructor(){
+    this.cost = 20000;
+    this.movement = {
+      tiles: 9,
+      type: 'air'
+    };
+    this.range = 1;
+    this.ammo = 9;
+    this.fuel = 99;
+    this.vision = 2;
+  }
+}
+class Bomber extends AirUnit{
+  constructor(){
+    this.cost = 22000;
+    this.movement = {
+      tiles: 7,
+      type: 'air'
+    };
+    this.range = 1;
+    this.ammo = 9;
+    this.fuel = 99;
+    this.vision = 2;
+  }
+}
+class StealthFighter extends AirUnit{
+  constructor(){
+    this.cost = 24000;
+    this.movement = {
+      tiles: 6,
+      type: 'air'
+    };
+    this.range = 1;
+    this.ammo = 6;
+    this.fuel = 60;
+    this.vision = 4;
+  }
+}
