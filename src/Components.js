@@ -11,5 +11,8 @@ WW.Components = {
   draw: function(){
     this.Background.draw();
     this.maps[this.selectedMapIndex].draw();
+  },
+  getCurrentMap: function(){
+    return this.maps[this.selectedMapIndex];
   }
 };

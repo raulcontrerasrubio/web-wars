@@ -14,7 +14,7 @@ WW.Components.Camera = class Camera{
       right: false,
     };
     this.view = {top: null, bottom: null, left: null, right: null};
-    this.zoom = 200;
+    this.zoom = 150;
     this.gridDimensions = gridDimensions;
     this.updateView();
   }
@@ -57,8 +57,8 @@ WW.Components.Camera = class Camera{
     let scale = this.zoom/100 >= 0 ? this.zoom/100 : this.zoom/(100*2); 
     let {rows, cols} = this.gridDimensions;
 
-    this.CAMERA_TILES_SIDES_UP_BOTTOM = 2 * Math.floor(( (WW.h/(1+scale))/WW.Config.TILE_HEIGHT)/2);
-    this.CAMERA_TILES_SIDES_RIGHT_LEFT = 2 * Math.floor(( (WW.w/(1+scale))/WW.Config.TILE_WIDTH)/2);
+    this.CAMERA_TILES_SIDES_UP_BOTTOM = 2 * Math.floor(( (WW.h/(1+scale))/WW.Config.TILE_HEIGHT)/2) + 1;
+    this.CAMERA_TILES_SIDES_RIGHT_LEFT = 2 * Math.floor(( (WW.w/(1+scale))/WW.Config.TILE_WIDTH)/2) + 1;
 
     this.view = {
       top: Math.floor(this.position.y/WW.Config.TILE_HEIGHT) - this.CAMERA_TILES_SIDES_UP_BOTTOM < 0 ? 0 : Math.floor(this.position.y/WW.Config.TILE_HEIGHT) - this.CAMERA_TILES_SIDES_UP_BOTTOM,
@@ -72,9 +72,9 @@ WW.Components.Camera = class Camera{
     WW.ctx.fillStyle = 'red';
     WW.ctx.beginPath();
     WW.ctx.moveTo(this.position.x, this.position.y);
-    WW.ctx.lineTo(this.position.x + 2, this.position.y - 2);
-    WW.ctx.lineTo(this.position.x - 2, this.position.y - 2);
-    WW.ctx.lineTo(this.position.x - 2, this.position.y + 2);
+    WW.ctx.lineTo(this.position.x + WW.Config.TILE_WIDTH/8, this.position.y - WW.Config.TILE_HEIGHT/8);
+    WW.ctx.lineTo(this.position.x - WW.Config.TILE_WIDTH/8, this.position.y - WW.Config.TILE_HEIGHT/8);
+    WW.ctx.lineTo(this.position.x - WW.Config.TILE_WIDTH/8, this.position.y + WW.Config.TILE_HEIGHT/8);
     WW.ctx.lineTo(this.position.x, this.position.y);
     WW.ctx.fill();
     WW.ctx.closePath();
@@ -82,9 +82,9 @@ WW.Components.Camera = class Camera{
     WW.ctx.fillStyle = 'red';
     WW.ctx.beginPath();
     WW.ctx.moveTo(this.position.x + WW.Config.TILE_WIDTH, this.position.y);
-    WW.ctx.lineTo(this.position.x + WW.Config.TILE_WIDTH - 2, this.position.y - 2);
-    WW.ctx.lineTo(this.position.x + WW.Config.TILE_WIDTH + 2, this.position.y - 2);
-    WW.ctx.lineTo(this.position.x + WW.Config.TILE_WIDTH + 2, this.position.y + 2);
+    WW.ctx.lineTo(this.position.x + WW.Config.TILE_WIDTH - WW.Config.TILE_WIDTH/8, this.position.y - WW.Config.TILE_HEIGHT/8);
+    WW.ctx.lineTo(this.position.x + WW.Config.TILE_WIDTH + WW.Config.TILE_WIDTH/8, this.position.y - WW.Config.TILE_HEIGHT/8);
+    WW.ctx.lineTo(this.position.x + WW.Config.TILE_WIDTH + WW.Config.TILE_WIDTH/8, this.position.y + WW.Config.TILE_HEIGHT/8);
     WW.ctx.lineTo(this.position.x + WW.Config.TILE_WIDTH, this.position.y);
     WW.ctx.fill();
     WW.ctx.closePath();
@@ -92,9 +92,9 @@ WW.Components.Camera = class Camera{
     WW.ctx.fillStyle = 'red';
     WW.ctx.beginPath();
     WW.ctx.moveTo(this.position.x + WW.Config.TILE_WIDTH, this.position.y + WW.Config.TILE_HEIGHT);
-    WW.ctx.lineTo(this.position.x + WW.Config.TILE_WIDTH + 2, this.position.y + WW.Config.TILE_HEIGHT - 2);
-    WW.ctx.lineTo(this.position.x + WW.Config.TILE_WIDTH + 2, this.position.y + WW.Config.TILE_HEIGHT + 2);
-    WW.ctx.lineTo(this.position.x + WW.Config.TILE_WIDTH - 2, this.position.y + WW.Config.TILE_HEIGHT + 2);
+    WW.ctx.lineTo(this.position.x + WW.Config.TILE_WIDTH + WW.Config.TILE_WIDTH/8, this.position.y + WW.Config.TILE_HEIGHT - WW.Config.TILE_HEIGHT/8);
+    WW.ctx.lineTo(this.position.x + WW.Config.TILE_WIDTH + WW.Config.TILE_WIDTH/8, this.position.y + WW.Config.TILE_HEIGHT + WW.Config.TILE_HEIGHT/8);
+    WW.ctx.lineTo(this.position.x + WW.Config.TILE_WIDTH - WW.Config.TILE_WIDTH/8, this.position.y + WW.Config.TILE_HEIGHT + WW.Config.TILE_HEIGHT/8);
     WW.ctx.lineTo(this.position.x + WW.Config.TILE_WIDTH, this.position.y + WW.Config.TILE_HEIGHT);
     WW.ctx.fill();
     WW.ctx.closePath();
@@ -102,9 +102,9 @@ WW.Components.Camera = class Camera{
     WW.ctx.fillStyle = 'red';
     WW.ctx.beginPath();
     WW.ctx.moveTo(this.position.x, this.position.y + WW.Config.TILE_HEIGHT);
-    WW.ctx.lineTo(this.position.x - 2, this.position.y + WW.Config.TILE_HEIGHT - 2);
-    WW.ctx.lineTo(this.position.x - 2, this.position.y + WW.Config.TILE_HEIGHT + 2);
-    WW.ctx.lineTo(this.position.x + 2, this.position.y + WW.Config.TILE_HEIGHT + 2);
+    WW.ctx.lineTo(this.position.x - WW.Config.TILE_WIDTH/8, this.position.y + WW.Config.TILE_HEIGHT - WW.Config.TILE_HEIGHT/8);
+    WW.ctx.lineTo(this.position.x - WW.Config.TILE_WIDTH/8, this.position.y + WW.Config.TILE_HEIGHT + WW.Config.TILE_HEIGHT/8);
+    WW.ctx.lineTo(this.position.x + WW.Config.TILE_WIDTH/8, this.position.y + WW.Config.TILE_HEIGHT + WW.Config.TILE_HEIGHT/8);
     WW.ctx.lineTo(this.position.x, this.position.y + WW.Config.TILE_HEIGHT);
     WW.ctx.fill();
     WW.ctx.closePath();

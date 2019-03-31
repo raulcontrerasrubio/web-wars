@@ -4,8 +4,138 @@ WW.Components.Map = class Map{
     this.cameras = [new WW.Components.Camera({rows: this.grid.grid.length, cols: this.grid.grid[0].length})];
     this.selectedCameraIndex = 0;
     this.teams = teams;
-    this.turn = 0;
+    this.teamTurnIndex = 0;
     this.actors = [];
+    this.day = 1;
+    // {type,team,capture,position (x,y)}
+    /*
+      {
+        team:'green', 
+        position:{x:0,y:0}
+      },
+      {
+        team:'green', 
+        position:{x:0,y:1}
+      }
+    */
+    this.buildings = [
+      {
+        team:'red', 
+        position:{x:5,y:1}
+      },
+      {
+        team:'blue', 
+        position:{x:1,y:28}
+      },
+      {
+        team:'green', 
+        position:{x:45,y:25}
+      },
+      {
+        team:'yellow', 
+        position:{x:33,y:10}
+      },
+      {
+        team:'black', 
+        position:{x:45,y:5}
+      },
+      {
+        team:'red', 
+        position:{x:5,y:8}
+      },
+      {
+        team:'blue', 
+        position:{x:9,y:22}
+      },
+      {
+        team:'green', 
+        position:{x:10,y:22}
+      },
+      {
+        team:'yellow', 
+        position:{x:33,y:10}
+      },
+      {
+        team:'black', 
+        position:{x:45,y:5}
+      },
+      {
+        team:'red', 
+        position:{x:19,y:8}
+      },
+      {
+        team:'red', 
+        position:{x:5,y:22}
+      },
+      {
+        team:'yellow', 
+        position:{x:7,y:22}
+      },
+      {
+        team:'black', 
+        position:{x:6,y:22}
+      },
+      {
+        team:'red', 
+        position:{x:19,y:8}
+      },
+      {
+        team:'blue', 
+        position:{x:20,y:8}
+      },
+      {
+        team:'green', 
+        position:{x:21,y:8}
+      },
+      {
+        team:'yellow', 
+        position:{x:22,y:8}
+      },
+      {
+        team:'black', 
+        position:{x:23,y:8}
+      },
+      {
+        team:'red', 
+        position:{x:4,y:9}
+      },
+      {
+        team:'blue', 
+        position:{x:5,y:9}
+      },
+      {
+        team:'green', 
+        position:{x:6,y:9}
+      },
+      {
+        team:'yellow', 
+        position:{x:7,y:9}
+      },
+      {
+        team:'black', 
+        position:{x:8,y:9}
+      },
+      {
+        team:'red', 
+        position:{x:43,y:13}
+      },
+      {
+        team:'blue', 
+        position:{x:44,y:13}
+      },
+      {
+        team:'green', 
+        position:{x:45,y:13}
+      },
+      {
+        team:'yellow', 
+        position:{x:46,y:13}
+      },
+      {
+        team:'black', 
+        position:{x:47,y:13}
+      },
+    ];
   }
   tileExists(x, y){
     try{
@@ -46,162 +176,48 @@ WW.Components.Map = class Map{
 
   printTile(x, y){
     var tile = this.getTileType(x, y);
-    if(tile && WW.Controllers.ImageManager.loadedImages[tile.name]){
-      var posY = y * WW.Config.TILE_HEIGHT + WW.Config.TILE_HEIGHT/2;
-      var posX = x * WW.Config.TILE_WIDTH + WW.Config.TILE_WIDTH/2;
-      
-      WW.Helpers.drawBitMap(WW.Controllers.ImageManager.loadedImages[tile.name], posX, posY);
-    }      
+    var img;
+    if(tile && WW.Controllers.ImageManager.loadedImages[tile.name].hasOwnProperty('white')){
+      switch(this.getTeamColor(x, y)){
+        case 'red':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].red;
+        break;
+        case 'blue':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].blue;
+        break;
+        case 'yellow':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].yellow;
+        break;
+        case 'green':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].green;
+        break;
+        case 'black':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].black;
+        break;
+        default:
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].white;
+        break;
+
+      }
+    }
+    if(tile && WW.Controllers.ImageManager.loadedImages[tile.name] && !img){
+      img = WW.Controllers.ImageManager.loadedImages[tile.name];
+    }
+    
+      var posY = y * WW.Config.TILE_HEIGHT;
+      var posX = x * WW.Config.TILE_WIDTH;
+      var bg = WW.Controllers.ImageManager.loadedImages.plain;
+      WW.ctx.drawImage(bg.src, bg.fromX, bg.fromY, bg.toX, bg.h, posX, posY - bg.h+WW.Config.TILE_HEIGHT, bg.w, bg.h);
+      WW.ctx.drawImage(img.src, img.fromX, img.fromY, img.toX, img.h, posX, posY - img.h+WW.Config.TILE_HEIGHT, img.w, img.h);
       
   };
+
+  getTeamColor(x, y){
+    for(let building of this.buildings){
+      if(building.position.x === x && building.position.y === y){
+        return building.team;
+      }
+    }
+    return 'white';
+  }
 };
-
-
-// var Map = function(layout){
-//   var self = this;
-
-//   this.grid;
-//   this.actors;
-
-//   this.init = () => {
-//     self.grid = layout ? layout : self.createEmptyMap(Config.DEFAULT_MAP_ROWS, Config.DEFAULT_MAP_COLS);
-//     self.actors = [];
-//   };
-
-//   Map.prototype.createEmptyMap = (rows, cols) => {
-//     var map = [];
-//     for(var i = 0; i < rows; i += 1){
-//       map.push([]);
-//       for(var j = 0; j < cols; j += 1){
-//         map[i].push(0);
-//       }
-//     }
-//     return map;
-//   };
-
-//   this.isAnyTileAvailable = () => {
-//     let listOfAvailableTilesId = Tile.getAccesibleToDirectionTilesId();
-//     return listOfAvailableTilesId.filter(id => {
-//       for(var r of self.grid){
-//         if(r.indexOf(id) !== -1){
-//           return true;
-//         }
-//       }
-//       return false;
-//     }).length !== 0;
-//   };
-
-//   this.getRandomPosition = () => {
-//     if(self.isAnyTileAvailable()){
-//       let validId = Tile.getAccesibleToDirectionTilesId();
-//       var valid = false;
-//       while(!valid){
-//         var {row, col} = self.getRandomCoord();
-//         valid = validId.includes(self.grid[row][col]);
-//       }
-//       return {row,col};
-//     }
-//     return false;
-//   };
-
-//   this.getRandomCoord = () => {
-//     let row = Math.floor(Math.random() * self.grid.length);
-//     let col = Math.floor(Math.random() * self.grid[row].length);
-//     return {row,col};
-//   }
-
-//   this.isValidRow = (y) => {
-//     return y >= 0 && self.grid[y];
-//   };
-
-//   this.canAccessFrom = (x, y, direction) => {
-//     if(y < 0){return false;}
-//     if(y > self.grid.length - 1){ return false;}
-//     if(x < 0){return false;}
-//     if(x > self.grid[y].length - 1){return false;}
-
-//     return Tile.getAccesibleFromDirectionTilesId(direction).includes(self.grid[y][x]);
-//   };
-
-//   this.canAccessTo = (x, y, direction) => {
-//     if(y < 0){return false;}
-//     if(y > self.grid.length - 1){ return false;}
-//     if(x < 0){return false;}
-//     if(x > self.grid[y].length - 1){return false;}
-
-//     return Tile.getAccesibleToDirectionTilesId(direction).includes(self.grid[y][x]);
-//   };
-
-//   this.isAnyObstacleActor = (x, y) => {
-//     let obstacles = self.actors.filter(actor => actor.isObstacle);
-//     for(let obstacle of obstacles){
-//       if(obstacle.position.x === x && obstacle.position.y === y){
-//         return true;
-//       }
-//     }
-//     return false;
-//   }
-
-//   this.isFreeCell = (x, y, direction) => {
-//     return self.isValidRow(y) && self.isAnyObstacleActor(x, y) && self.canAccessTo(x, y, direction);
-//   };
-  
-//   this.addRover = (id, controls) => {
-//     if(self.isAnyTileAvailable()){
-//         let newRover = new Rover(id);
-//         newRover.setControls(controls);
-//         self.actors.push(newRover);
-//         Game.createCamera(newRover);
-//         return true;
-//     }else{
-//       console.log("¡No hay más espacio!");
-//     }
-//     return false;
-//   };
-
-//   this.printTilesOnScreen = () => {
-//     for(let i = Game.selectedCamera.view.top, rows = Game.selectedCamera.view.bottom; i < rows; i+= 1){
-//       for(let j = Game.selectedCamera.view.left, cols = Game.selectedCamera.view.right; j < cols; j += 1){
-//         self.printTile(j, i);
-//       }
-//     }
-//   };
-
-//   this.tileExists = (x, y) => {
-//     try{
-//       this.grid[y][x];
-//       return true;
-//     }catch(e){
-//       return false;
-//     }
-//   }; 
-
-//   this.getTileType = (x, y) => {
-//     if(self.tileExists(x, y)){
-//       var response = false;
-//       var currentTile = this.grid[y][x];
-//       var foundTile = Tile.getTileById(currentTile);
-      
-//       if(foundTile){
-//         response = foundTile;
-//       }
-
-//       return response;
-//     }
-//   };
-
-//   this.printTile = (x, y) => {
-//     var tile = self.getTileType(x, y);
-//     if(tile && tile.image){
-//       var posY = y * Config.TILE_HEIGHT + Config.TILE_HEIGHT/2;
-//       var posX = x * Config.TILE_WIDTH + Config.TILE_WIDTH/2;
-      
-//       Common.drawBitMap(tile.image, posX, posY);
-//     }      
-      
-//   };
-
-//   // Execution
-//   this.init();
-  
-// }
