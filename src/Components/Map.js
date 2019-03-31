@@ -20,6 +20,8 @@ WW.Components.Map = class Map{
   }
   printAll(){
     this.drawTiles();
+    this.cameras[this.selectedCameraIndex].printPosition();
+    this.actors.forEach(actor => actor.draw());
   }
   drawTiles(){
     for(let i = this.cameras[this.selectedCameraIndex].view.top, rows = this.cameras[this.selectedCameraIndex].view.bottom; i < rows; i+= 1){
