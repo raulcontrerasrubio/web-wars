@@ -1,0 +1,5 @@
+WW.Data = {
+  init: function(){
+    
+  }
+};

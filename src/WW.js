@@ -32,6 +32,8 @@ const WW = {
     this.setFullScreen();
     this.frameCount = 0;
 
+    this.Data.init();
+    this.Controllers.init();
     this.Components.init();
 
     this.gameLoop();
@@ -47,9 +49,11 @@ const WW = {
     this.ctx.clearRect(0, 0, this.w, this.h);
   },
   moveAll: function(){
+    this.Controllers.move();
     this.Components.move();
   },
   drawAll: function(){
+    this.Controllers.draw();
     this.Components.draw();
   }
 };
