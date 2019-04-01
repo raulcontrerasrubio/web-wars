@@ -14,22 +14,22 @@ WW.Controllers.ImageManager = {
         response[key].w = dataset[key].img.w;
         response[key].h = dataset[key].img.h;
       }
-      // Ask the map the team color
-      if(typeof dataset[key].img === 'object' && dataset[key].img.hasOwnProperty('white')){
+
+      if(typeof dataset[key].img === 'object' && (dataset[key].img.hasOwnProperty('white') || dataset[key].img.hasOwnProperty('horizontal'))){
         response[key] = {};
-        for(let team in dataset[key].img){
-          response[key][team] = {};
-          response[key][team].src = new Image();
-          response[key][team].src.src = dataset[key].img[team].origin;
-          response[key][team].fromX = dataset[key].img[team].x;
-          response[key][team].fromY = dataset[key].img[team].y;
-          response[key][team].toX = dataset[key].img[team].toX;
-          response[key][team].toY = dataset[key].img[team].toY;
-          response[key][team].w = dataset[key].img[team].w;
-          response[key][team].h = dataset[key].img[team].h;
+        for(let name in dataset[key].img){
+          response[key][name] = {};
+          response[key][name].src = new Image();
+          response[key][name].src.src = dataset[key].img[name].origin;
+          response[key][name].fromX = dataset[key].img[name].x;
+          response[key][name].fromY = dataset[key].img[name].y;
+          response[key][name].toX = dataset[key].img[name].toX;
+          response[key][name].toY = dataset[key].img[name].toY;
+          response[key][name].w = dataset[key].img[name].w;
+          response[key][name].h = dataset[key].img[name].h;
         }
       }
     }
     return response;
   }
-}
+};

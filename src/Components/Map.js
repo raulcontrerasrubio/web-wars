@@ -172,7 +172,59 @@ WW.Components.Map = class Map{
 
       return response;
     }
-  };
+  }
+
+  getNearlyTiles(x, y, tile){
+    if(WW.Controllers.ImageManager.loadedImages[tile.name].hasOwnProperty('fourWays')){
+      if(this.grid.grid[y-1] && this.grid.grid[y+1] && this.getTileType(x-1, y).name  === tile.name && this.getTileType(x+1, y).name === tile.name && this.getTileType(x, y-1).name === tile.name && this.getTileType(x, y+1).name === tile.name){
+        return 'fourWays';
+      }
+      if(this.grid.grid[y-1] && this.getTileType(x-1, y).name  === tile.name && this.getTileType(x+1, y).name === tile.name && this.getTileType(x, y-1).name === tile.name){
+        return 'threeWaysUp';
+      }
+      if(this.grid.grid[y+1] && this.getTileType(x-1, y).name  === tile.name && this.getTileType(x+1, y).name === tile.name && this.getTileType(x, y+1).name === tile.name){
+        return 'threeWaysDown';
+      }
+      if(this.grid.grid[y-1] && this.grid.grid[y+1] && this.getTileType(x-1, y).name === tile.name && this.getTileType(x, y-1).name === tile.name && this.getTileType(x, y+1).name === tile.name){
+        return 'threeWaysLeft';
+      }
+
+      if(this.grid.grid[y-1] && this.grid.grid[y+1] && this.getTileType(x+1, y).name  === tile.name && this.getTileType(x, y-1).name === tile.name && this.getTileType(x, y+1).name === tile.name){
+        return 'threeWaysRight';
+      }
+
+      if(this.grid.grid[y+1] && this.getTileType(x+1, y).name === tile.name && this.getTileType(x, y+1).name === tile.name){
+        return 'twoWaysUpRight';
+      }
+
+      if(this.grid.grid[y+1] && this.getTileType(x-1, y).name === tile.name && this.getTileType(x, y+1).name === tile.name){
+        return 'twoWaysUpLeft';
+      }
+
+      if(this.grid.grid[y-1] && this.getTileType(x+1, y).name === tile.name && this.getTileType(x, y-1).name === tile.name){
+        return 'twoWaysDownRight';
+      }
+
+      if(this.grid.grid[y-1] && this.getTileType(x-1, y).name === tile.name && this.getTileType(x, y-1).name === tile.name){
+        return 'twoWaysDownLeft';
+      }
+
+      if(this.grid.grid[y-1] && tile.name === this.getTileType(x, y-1).name || this.grid.grid[y+1] && tile.name === this.getTileType(x, y+1).name){
+        return 'vertical';
+      }
+      
+      return 'horizontal';
+
+    }
+
+    if(WW.Controllers.ImageManager.loadedImages[tile.name].horizontal){
+      if(this.grid.grid[y-1] && tile.name === this.getTileType(x, y-1).name || this.grid.grid[y+1] && tile.name === this.getTileType(x, y+1).name){
+        return 'vertical';
+      }
+      
+      return 'horizontal';
+    }
+  }
 
   printTile(x, y){
     var tile = this.getTileType(x, y);
@@ -197,7 +249,45 @@ WW.Components.Map = class Map{
         default:
           img = WW.Controllers.ImageManager.loadedImages[tile.name].white;
         break;
-
+      }
+    }
+    if(tile && WW.Controllers.ImageManager.loadedImages[tile.name].hasOwnProperty('horizontal')){
+      switch(this.getNearlyTiles(x, y, tile)){
+        case 'fourWays':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].fourWays;
+        break;
+        case 'threeWaysUp':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].threeWaysUp;
+        break;
+        case 'threeWaysDown':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].threeWaysDown;
+        break;
+        case 'threeWaysRight':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].threeWaysRight;
+        break;
+        case 'threeWaysLeft':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].threeWaysLeft;
+        break;
+        case 'twoWaysUpRight':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].twoWaysUpRight;
+        break;
+        case 'twoWaysUpLeft':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].twoWaysUpLeft;
+        break;
+        case 'twoWaysDownRight':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].twoWaysDownRight;
+        break;
+        case 'twoWaysDownLeft':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].twoWaysDownLeft;
+        break;
+        case 'horizontal':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].horizontal;
+        break;
+        case 'vertical':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].vertical;
+        break;
+        default:
+          throw new Error('Image not defined');
       }
     }
     if(tile && WW.Controllers.ImageManager.loadedImages[tile.name] && !img){
@@ -207,10 +297,10 @@ WW.Components.Map = class Map{
       var posY = y * WW.Config.TILE_HEIGHT;
       var posX = x * WW.Config.TILE_WIDTH;
       var bg = WW.Controllers.ImageManager.loadedImages.plain;
-      WW.ctx.drawImage(bg.src, bg.fromX, bg.fromY, bg.toX, bg.h, posX, posY - bg.h+WW.Config.TILE_HEIGHT, bg.w, bg.h);
-      WW.ctx.drawImage(img.src, img.fromX, img.fromY, img.toX, img.h, posX, posY - img.h+WW.Config.TILE_HEIGHT, img.w, img.h);
+      WW.ctx.drawImage(bg.src, bg.fromX, bg.fromY, bg.toX, bg.h, posX - bg.w+WW.Config.TILE_WIDTH, posY - bg.h+WW.Config.TILE_HEIGHT, bg.w, bg.h);
+      WW.ctx.drawImage(img.src, img.fromX, img.fromY, img.w, img.h, posX, posY - img.h+WW.Config.TILE_HEIGHT, img.w, img.h);
       
-  };
+  }
 
   getTeamColor(x, y){
     for(let building of this.buildings){
@@ -220,4 +310,5 @@ WW.Components.Map = class Map{
     }
     return 'white';
   }
+
 };
