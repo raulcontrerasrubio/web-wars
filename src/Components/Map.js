@@ -145,7 +145,7 @@ WW.Components.Map = class Map{
   printTile(x, y){
     var tile = this.getTileType(x, y);
     var img;
-    if(tile && WW.Controllers.ImageManager.loadedImages[tile.name].hasOwnProperty('white')){
+    if(tile && WW.Controllers.ImageManager.loadedImages[tile.name].hasOwnProperty('red')){
       switch(this.getTeamColor(x, y)){
         case 'red':
           img = WW.Controllers.ImageManager.loadedImages[tile.name].red;
@@ -260,6 +260,10 @@ WW.Components.Map = class Map{
       WW.ctx.drawImage(bg.src, bg.fromX, bg.fromY, bg.toX, bg.h, posX - bg.w+WW.Config.TILE_WIDTH, posY - bg.h+WW.Config.TILE_HEIGHT, bg.w, bg.h);
       WW.ctx.drawImage(img.src, img.fromX, img.fromY, img.w, img.h, posX, posY - img.h+WW.Config.TILE_HEIGHT, img.w, img.h);
       // Print unit
+      var actors = this.actors.filter(actor => actor.position.x === x && actor.position.y === y);
+      for(let actor of actors){
+        actor.draw();
+      }
       
   }
 
