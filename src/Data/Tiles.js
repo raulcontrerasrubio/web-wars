@@ -3,18 +3,46 @@ WW.Data.Tiles = {
     plain: {
       id: 0,
       img: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 0, 16, 16),
+      movementCost: {
+        infantry: 1,
+        mech: 1,
+        tires: 2,
+        tread: 1,
+        air: 1,
+      },
+      defense: 1
     },
     sea: {
       id: 1,
       img: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16),
+      movementCost: {
+        ships: 1,
+        trans: 1,
+        air: 1,
+      },
+      defense: 0
     },
     mountain: {
       id: 2,
       img: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 96, 16, 32),
+      movementCost: {
+        infantry: 2,
+        mech: 1,
+        air: 1,
+      },
+      defense: 4,
     },
     wood: {
       id: 3,
       img: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 48, 16, 16),
+      movementCost: {
+        infantry: 1,
+        mech: 1,
+        tires: 3,
+        tread: 2,
+        air: 1,
+      },
+      defense: 2,
     },
     shoal: {
       id: 4,
@@ -32,10 +60,25 @@ WW.Data.Tiles = {
         cornerTopRight: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 192, 16, 16, 16),
         cornerTopLeft: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 176, 16, 16, 16),
       },
+      movementCost: {
+        infantry: 1,
+        mech: 1,
+        tires: 1,
+        tread: 1,
+        trans: 1,
+        air: 1,
+      },
+      defense: 0,
     },
     reef: {
       id: 5,
-      img: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 16, 16, 16)
+      img: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 16, 16, 16),
+      movementCost: {
+        ships: 2,
+        trans: 2,
+        air: 1,
+      },
+      defense: 1,
     },
     road: {
       id: 6,
@@ -52,6 +95,14 @@ WW.Data.Tiles = {
         horizontal: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 16, 0, 16, 16),
         vertical: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 16, 16, 16, 16),
       },
+      movementCost: {
+        infantry: 1,
+        mech: 1,
+        tires: 1,
+        tread: 1,
+        air: 1,
+      },
+      defense: 0,
     },
     bridge: {
       id: 7,
@@ -59,6 +110,14 @@ WW.Data.Tiles = {
         horizontal: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 32, 0, 16, 16),
         vertical: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 32, 16, 16, 16),
       },
+      movementCost: {
+        infantry: 1,
+        mech: 1,
+        tires: 1,
+        tread: 1,
+        air: 1,
+      },
+      defense: 0,
     },
     hq: {
       id: 8,
@@ -69,7 +128,17 @@ WW.Data.Tiles = {
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-buildings.png', 0, 2, 16, 32),
         black: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/black-buildings.png', 0, 2, 16, 32),
         white: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/black-buildings.png', 0, 2, 16, 32),
-      }
+      },
+      movementCost: {
+        infantry: 1,
+        mech: 1,
+        tires: 1,
+        tread: 1,
+        air: 1,
+      },
+      defense: 4,
+      funds: 1000,
+      repair: 'land',
     },
     city: {
       id: 9,
@@ -81,6 +150,16 @@ WW.Data.Tiles = {
         black: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/black-buildings.png', 0, 38, 16, 20),
         white: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/white-buildings.png', 0, 0, 16, 20),
       },
+      movementCost: {
+        infantry: 1,
+        mech: 1,
+        tires: 1,
+        tread: 1,
+        air: 1,
+      },
+      defense: 3,
+      funds: 1000,
+      repair:'land',
     },
     base: {
       id: 10,
@@ -92,6 +171,16 @@ WW.Data.Tiles = {
         black: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/black-buildings.png', 0, 62, 16, 16),
         white: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/white-buildings.png', 0, 23, 16, 16),
       },
+      movementCost: {
+        infantry: 1,
+        mech: 1,
+        tires: 1,
+        tread: 1,
+        air: 1,
+      },
+      defense: 3,
+      funds: 1000,
+      repair: 'land',
     },
     airport: {
       id: 11,
@@ -102,7 +191,17 @@ WW.Data.Tiles = {
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-buildings.png', 0, 217, 16, 18),
         black: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/black-buildings.png', 0, 82, 16, 18),
         white: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/white-buildings.png', 0, 42, 16, 18),
-      }
+      },
+      movementCost: {
+        infantry: 1,
+        mech: 1,
+        tires: 1,
+        tread: 1,
+        air: 1,
+      },
+      defense: 3,
+      funds: 1000,
+      repair: 'air',
     },
     port: {
       id: 12,
@@ -113,7 +212,19 @@ WW.Data.Tiles = {
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-buildings.png', 0, 239, 16, 20),
         black: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/black-buildings.png', 0, 104, 16, 20),
         white: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/white-buildings.png', 0, 64, 16, 20),
-      }
+      },
+      movementCost: {
+        infantry: 1,
+        mech: 1,
+        tires: 1,
+        tread: 1,
+        ships: 1,
+        trans: 1,
+        air: 1,
+      },
+      defense: 3,
+      funds: 1000,
+      repair: 'sea',
     },
     river: {
       id: 13,
@@ -130,6 +241,12 @@ WW.Data.Tiles = {
         horizontal: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 48, 0, 16, 16),
         vertical: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 48, 16, 16, 16),
       },
+      movementCost: {
+        infantry: 2,
+        mech: 1,
+        air: 1,
+      },
+      defense: 0,
     },
   },
   getTileById: function(id){
