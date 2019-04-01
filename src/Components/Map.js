@@ -5,137 +5,10 @@ WW.Components.Map = class Map{
     this.selectedCameraIndex = 0;
     this.teams = teams;
     this.teamTurnIndex = 0;
+    this.buildings = [...grid.buildings];
     this.actors = [];
     this.day = 1;
     // {type,team,capture,position (x,y)}
-    /*
-      {
-        team:'green', 
-        position:{x:0,y:0}
-      },
-      {
-        team:'green', 
-        position:{x:0,y:1}
-      }
-    */
-    this.buildings = [
-      {
-        team:'red', 
-        position:{x:5,y:1}
-      },
-      {
-        team:'blue', 
-        position:{x:1,y:28}
-      },
-      {
-        team:'green', 
-        position:{x:45,y:25}
-      },
-      {
-        team:'yellow', 
-        position:{x:33,y:10}
-      },
-      {
-        team:'black', 
-        position:{x:45,y:5}
-      },
-      {
-        team:'red', 
-        position:{x:5,y:8}
-      },
-      {
-        team:'blue', 
-        position:{x:9,y:22}
-      },
-      {
-        team:'green', 
-        position:{x:10,y:22}
-      },
-      {
-        team:'yellow', 
-        position:{x:33,y:10}
-      },
-      {
-        team:'black', 
-        position:{x:45,y:5}
-      },
-      {
-        team:'red', 
-        position:{x:19,y:8}
-      },
-      {
-        team:'red', 
-        position:{x:5,y:22}
-      },
-      {
-        team:'yellow', 
-        position:{x:7,y:22}
-      },
-      {
-        team:'black', 
-        position:{x:6,y:22}
-      },
-      {
-        team:'red', 
-        position:{x:19,y:8}
-      },
-      {
-        team:'blue', 
-        position:{x:20,y:8}
-      },
-      {
-        team:'green', 
-        position:{x:21,y:8}
-      },
-      {
-        team:'yellow', 
-        position:{x:22,y:8}
-      },
-      {
-        team:'black', 
-        position:{x:23,y:8}
-      },
-      {
-        team:'red', 
-        position:{x:4,y:9}
-      },
-      {
-        team:'blue', 
-        position:{x:5,y:9}
-      },
-      {
-        team:'green', 
-        position:{x:6,y:9}
-      },
-      {
-        team:'yellow', 
-        position:{x:7,y:9}
-      },
-      {
-        team:'black', 
-        position:{x:8,y:9}
-      },
-      {
-        team:'red', 
-        position:{x:43,y:13}
-      },
-      {
-        team:'blue', 
-        position:{x:44,y:13}
-      },
-      {
-        team:'green', 
-        position:{x:45,y:13}
-      },
-      {
-        team:'yellow', 
-        position:{x:46,y:13}
-      },
-      {
-        team:'black', 
-        position:{x:47,y:13}
-      },
-    ];
   }
   tileExists(x, y){
     try{
@@ -386,6 +259,7 @@ WW.Components.Map = class Map{
       var bg = WW.Controllers.ImageManager.loadedImages.plain;
       WW.ctx.drawImage(bg.src, bg.fromX, bg.fromY, bg.toX, bg.h, posX - bg.w+WW.Config.TILE_WIDTH, posY - bg.h+WW.Config.TILE_HEIGHT, bg.w, bg.h);
       WW.ctx.drawImage(img.src, img.fromX, img.fromY, img.w, img.h, posX, posY - img.h+WW.Config.TILE_HEIGHT, img.w, img.h);
+      // Print unit
       
   }
 
