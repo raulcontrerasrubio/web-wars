@@ -29,7 +29,7 @@ WW.Data.Units.MediumTank = class MediumTank extends WW.Data.Unit{
       submarine: new WW.Data.DamageChart(10,null),
     };
     this.fuel = 50;
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.mediumTank[team];
     this.ammo = 8;
     this.range = [1];
   }

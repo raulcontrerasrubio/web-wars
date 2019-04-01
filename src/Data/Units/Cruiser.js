@@ -29,7 +29,7 @@ WW.Data.Units.Cruiser = class Cruiser extends WW.Data.Unit{
       submarine: new WW.Data.DamageChart(90,null),
     };
     this.fuel = 99;
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.cruiser[team];
     this.ammo = 9;
     this.range = [1];
   }

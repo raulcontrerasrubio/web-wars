@@ -29,7 +29,7 @@ WW.Data.Units.Lander = class Lander extends WW.Data.Unit{
       submarine: null,
     };
     this.fuel = 99;
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.lander[team];
     this.range = [0];
     this.canCharge = true;
     this.maxCharge = 3;

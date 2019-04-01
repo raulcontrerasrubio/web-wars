@@ -29,7 +29,7 @@ WW.Data.Units.TCopter = class TCopter extends WW.Data.Unit{
       submarine: null,
     };
     this.fuel = 99;
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.tCopter[team];
     this.range = [0];
     this.canCharge = true;
     this.charge = [];

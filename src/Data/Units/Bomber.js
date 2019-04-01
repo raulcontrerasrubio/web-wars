@@ -29,7 +29,7 @@ WW.Data.Units.Bomber = class Bomber extends WW.Data.Unit{
       submarine: new WW.Data.DamageChart(95,null),
     };
     this.fuel = 99;
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.bomber[team];
     this.ammo = 9;
     this.range = [1];
   }

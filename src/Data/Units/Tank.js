@@ -29,7 +29,7 @@ WW.Data.Units.Tank = class Tank extends WW.Data.Unit{
       submarine: new WW.Data.DamageChart(1,null),
     };
     this.fuel = 70;
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.tank[team];
     this.ammo = 9;
     this.range = [1];
   }

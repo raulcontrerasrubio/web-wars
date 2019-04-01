@@ -28,7 +28,7 @@ WW.Data.Units.NeoTank = class NeoTank extends WW.Data.Unit{
       lander: new WW.Data.DamageChart(50,null),
       submarine: new WW.Data.DamageChart(15,null),
     };
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.neoTank[team];
     this.ammo = 9;
     this.range = [1];
   }

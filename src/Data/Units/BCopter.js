@@ -27,7 +27,7 @@ WW.Data.Units.BCopter = class BCopter extends WW.Data.Unit{
       submarine: new WW.Data.DamageChart(25,null),
     };
     this.fuel = 99;
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.bCopter[team];
     this.ammo = 6;
     this.range = [1];
   }

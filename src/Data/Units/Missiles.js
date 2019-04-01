@@ -29,7 +29,7 @@ WW.Data.Units.Missiles = class Missiles extends WW.Data.Unit{
       submarine: null,
     };
     this.fuel = 50;
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.missiles[team];
     this.ammo = 6;
     this.range = [3,4,5];
   }

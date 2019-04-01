@@ -29,7 +29,7 @@ WW.Data.Units.Battleship = class Battleship extends WW.Data.Unit{
       submarine: new WW.Data.DamageChart(95,null),
     };
     this.fuel = 99;
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.battleship[team];
     this.ammo = 9;
     this.range = [2,3,4,5,6];
   }

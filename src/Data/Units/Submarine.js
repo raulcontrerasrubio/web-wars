@@ -29,7 +29,7 @@ WW.Data.Units.Submarine = class Submarine extends WW.Data.Unit{
       submarine: new WW.Data.DamageChart(55,null),
     };
     this.fuel = 60;
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.submarine[team];
     this.ammo = 6;
     this.range = [1];
     this.canSumerge = true;

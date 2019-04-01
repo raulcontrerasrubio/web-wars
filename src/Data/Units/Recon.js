@@ -29,7 +29,7 @@ WW.Data.Units.Recon = class Recon extends WW.Data.Unit{
       submarine: null,
     };
     this.fuel = 80;
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.recon[team];
     this.range = [1];
   }
 };

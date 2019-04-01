@@ -29,7 +29,7 @@ WW.Data.Units.Artillery = class Artillery extends WW.Data.Unit{
       submarine: new WW.Data.DamageChart(60,null),
     };
     this.fuel = 50;
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.artillery[team];
     this.ammo = 9;
     this.range = [2,3];
   }

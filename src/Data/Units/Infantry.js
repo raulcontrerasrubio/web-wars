@@ -30,7 +30,7 @@ WW.Data.Units.Infantry = class Infantry extends WW.Data.Unit{
       lander: null,
       submarine: null,
     };
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.infantry[team];
     this.canCapture = true;
   }
 };

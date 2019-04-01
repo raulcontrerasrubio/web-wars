@@ -29,7 +29,7 @@ WW.Data.Units.APC = class APC extends WW.Data.Unit{
       submarine: null,
     };
     this.fuel = 70;
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.apc[team];
     this.range = [0];
     this.canSupply = true;
     this.canCharge = true;

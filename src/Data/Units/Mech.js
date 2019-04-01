@@ -29,7 +29,7 @@ WW.Data.Units.Mech = class Mech extends WW.Data.Unit{
       submarine: null,
     };
     this.fuel = 70;
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.mech[team];
     this.ammo = 3;
     this.canCapture = true;
   }

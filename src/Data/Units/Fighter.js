@@ -28,7 +28,7 @@ WW.Data.Units.Fighter = class Fighter extends WW.Data.Unit{
       lander: null,
       submarine: null,
     };
-    this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+    this.image = WW.Controllers.ImageManager.loadedImages.fighter[team];
     this.ammo = 9;
     this.range = [1];
   }
