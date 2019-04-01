@@ -16,26 +16,21 @@ WW.Data.Tiles = {
       id: 3,
       img: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 48, 16, 16),
     },
-    river: {
-      id: 3,
-      img: {
-        fourWays: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 0, 16, 16),
-        threeWaysUp: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 0, 16, 16),
-        threeWaysDown: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 0, 16, 16),
-        threeWaysRight: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 0, 16, 16),
-        threeWaysLeft: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 0, 16, 16),
-        twoWaysUpRight: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 0, 16, 16),
-        twoWaysUpLeft: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 0, 16, 16),
-        twoWaysDownRight: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 0, 16, 16),
-        twoWaysDownLeft: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 0, 16, 16),
-        horizontal: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 0, 16, 16),
-        vertical: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 0, 16, 16),
-      },
-    },
     shoal: {
       id: 4,
       img: {
-
+        top: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 160, 48, 16, 16),
+        bottom: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 144, 48, 16, 16),
+        right: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 144, 36, 16, 16),
+        left: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 160, 48, 16, 16),
+        middleTop: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 160, 16, 16, 16),
+        middleBottom: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 144, 16, 16, 16),
+        middleRight: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 144, 0, 16, 16),
+        middleLeft: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 160, 0, 16, 16),
+        cornerBottomRight: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 192, 0, 16, 16),
+        cornerBottomLeft: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 176, 0, 16, 16),
+        cornerTopRight: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 192, 16, 16, 16),
+        cornerTopLeft: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 176, 16, 16, 16),
       },
     },
     reef: {
@@ -119,6 +114,22 @@ WW.Data.Tiles = {
         black: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/black-buildings.png', 0, 104, 16, 20),
         white: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/white-buildings.png', 0, 64, 16, 20),
       }
+    },
+    river: {
+      id: 13,
+      img: {
+        fourWays: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 48, 32, 16, 16),
+        threeWaysUp: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 60, 96, 16, 16),
+        threeWaysDown: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 48, 96, 16, 16),
+        threeWaysRight: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 48, 80, 16, 16),
+        threeWaysLeft: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 64, 80, 16, 16),
+        twoWaysUpRight: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 48, 64, 16, 16),
+        twoWaysUpLeft: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 64, 64, 16, 16),
+        twoWaysDownRight: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 48, 112, 16, 16),
+        twoWaysDownLeft: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 64, 112, 16, 16),
+        horizontal: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 48, 0, 16, 16),
+        vertical: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 48, 16, 16, 16),
+      },
     },
   },
   getTileById: function(id){

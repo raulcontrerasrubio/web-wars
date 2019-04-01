@@ -226,6 +226,49 @@ WW.Components.Map = class Map{
     }
   }
 
+  getNearlyShore(x, y, tile){
+    if(WW.Controllers.ImageManager.loadedImages[tile.name].hasOwnProperty('top')){
+      if(this.grid.grid[y-1] && tile.name === this.getTileType(x-1, y).name && tile.name === this.getTileType(x+1, y).name && this.getTileType(x, y-1).name === 'sea'){
+        return 'middleTop';
+      }
+      if(this.grid.grid[y+1] && tile.name === this.getTileType(x-1, y).name && tile.name === this.getTileType(x+1, y).name && this.getTileType(x, y+1).name === 'sea'){
+        return 'middleBottom';
+      }
+      if(this.grid.grid[y+1] && this.grid.grid[y-1] && tile.name === this.getTileType(x, y-1).name && tile.name === this.getTileType(x, y+1).name && this.getTileType(x+1, y).name === 'sea'){
+        return 'middleRight';
+      }
+      if(this.grid.grid[y+1] && this.grid.grid[y-1] && tile.name === this.getTileType(x, y-1).name && tile.name === this.getTileType(x, y+1).name && this.getTileType(x-1, y).name === 'sea'){
+        return 'middleLeft';
+      }
+      if(this.grid.grid[y-1] && tile.name === this.getTileType(x, y-1).name && tile.name === this.getTileType(x-1, y).name){
+        return 'cornerTopRight';
+      }
+      if(this.grid.grid[y-1] && tile.name === this.getTileType(x, y-1).name && tile.name === this.getTileType(x+1, y).name){
+        return 'cornerTopLeft';
+      }
+      if(this.grid.grid[y+1] && tile.name === this.getTileType(x, y+1).name && tile.name === this.getTileType(x-1, y).name){
+        return 'cornerBottomRight';
+      }
+      if(this.grid.grid[y+1] && tile.name === this.getTileType(x, y+1).name && tile.name === this.getTileType(x+1, y).name){
+        return 'cornerBottomLeft';
+      }
+      if(this.grid.grid[y-1] && this.getTileType(x, y-1).name === 'sea'){
+        return 'top';
+      }
+      if(this.grid.grid[y+1] && this.getTileType(x, y+1).name === 'sea'){
+        return 'bottom';
+      }
+      if(this.grid.grid[y+1] && this.getTileType(x+1, y).name === 'sea'){
+        return 'right';
+      }
+      if(this.grid.grid[y+1] && this.getTileType(x-1, y).name === 'sea'){
+        return 'left';
+      }
+      
+      throw new Error(tile.name + ' is not found');
+    }
+  }
+
   printTile(x, y){
     var tile = this.getTileType(x, y);
     var img;
@@ -251,6 +294,50 @@ WW.Components.Map = class Map{
         break;
       }
     }
+
+    if(tile && WW.Controllers.ImageManager.loadedImages[tile.name].hasOwnProperty('top')){
+      switch(this.getNearlyShore(x, y, tile)){
+        case 'top':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].top;
+        break;
+        case 'bottom':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].bottom;
+        break;
+        case 'right':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].right;
+        break;
+        case 'left':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].left;
+        break;
+        case 'middleTop':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].middleTop;
+        break;
+        case 'middleBottom':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].middleBottom;
+        break;
+        case 'middleRight':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].middleRight;
+        break;
+        case 'middleLeft':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].middleLeft;
+        break;
+        case 'cornerTopLeft':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].cornerTopLeft;
+        break;
+        case 'cornerTopRight':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].cornerTopRight;
+        break;
+        case 'cornerBottomLeft':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].cornerBottomLeft;
+        break;
+        case 'cornerBottomRight':
+          img = WW.Controllers.ImageManager.loadedImages[tile.name].cornerBottomRight;
+        break;
+        default:
+          throw new Error('Image not defined');
+      }
+    }
+
     if(tile && WW.Controllers.ImageManager.loadedImages[tile.name].hasOwnProperty('horizontal')){
       switch(this.getNearlyTiles(x, y, tile)){
         case 'fourWays':

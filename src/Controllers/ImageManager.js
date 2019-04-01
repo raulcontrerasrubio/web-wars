@@ -15,7 +15,7 @@ WW.Controllers.ImageManager = {
         response[key].h = dataset[key].img.h;
       }
 
-      if(typeof dataset[key].img === 'object' && (dataset[key].img.hasOwnProperty('white') || dataset[key].img.hasOwnProperty('horizontal'))){
+      if(typeof dataset[key].img === 'object' && (dataset[key].img.hasOwnProperty('white') || dataset[key].img.hasOwnProperty('horizontal') || dataset[key].img.hasOwnProperty('top'))){
         response[key] = {};
         for(let name in dataset[key].img){
           response[key][name] = {};
