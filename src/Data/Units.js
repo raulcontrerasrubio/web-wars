@@ -174,22 +174,47 @@ WW.Data.Units = {
   },
   unit: class Unit{
     constructor(){
-      this.position = {};
+      this.position = {x:null, y:null};
       this.team = '';
       this.type = '';
+      this.movementType = '';
       this.cost = 1000;
-      this.movementCost = {};
-      this.health = 0;
+      this.health = 100;
       this.movement = 0;
       this.vision = 0;
-      this.damageChart = {};
-      this.fuel = 0;
+      this.damageChart = {
+        infantry: null,
+        mech: null,
+        recon: null,
+        tank: null,
+        mediumTank: null,
+        neoTank: null,
+        apc: null,
+        artillery: null,
+        rockets: null,
+        antiAir: null,
+        missiles: null,
+        fighter: null,
+        bomber: null,
+        bCopter: null,
+        tCopter: null,
+        battleship: null,
+        cruiser: null,
+        lander: null,
+        submarine: null,
+      };
+      this.fuel = 99;
       this.image = null;
       this.viewRight = true;
       this.ammo = null;
       this.range = [1];
+      this.canSumerge = false;
+      this.canSupply = false;
+      this.canCharge = false;
+      this.canJoin = false;
+      this.canCapture = false;
     }
-    getUnitPoints(){
+    getIntegerHealthPoints(){
       return Math.ceil(this.health/100);
     }
     move(){
@@ -209,1439 +234,690 @@ WW.Data.Units = {
   infantry: class Infantry extends Unit{
     constructor(x,y, team = 'red'){
       super();
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
       this.type = 'land';
+      this.movementType = 'infantry';
       this.cost = 1000;
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        mountain: 2,
-        river: 2,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
       this.health = 100;
       this.movement = 3;
-      this.vision = 3;
+      this.vision = 2;
       this.damageChart = {
-        infantry: {
-          primary: null,
-          secondary: 55
-        },
-        mech: {
-          primary: null,
-          secondary: 45
-        },
-        recon: {
-          primary: null,
-          secondary: 12
-        },
-        tank: {
-          primary: null,
-          secondary: 5
-        },
-        mediumTank: {
-          primary: null,
-          secondary: 1
-        },
-        apc: {
-          primary: null,
-          secondary: 14
-        },
-        artillery: {
-          primary: null,
-          secondary: 15
-        },
-        rockets: {
-          primary: null,
-          secondary: 25
-        },
-        antiAir: {
-          primary: null,
-          secondary: 5
-        },
-        missiles: {
-          primary: null,
-          secondary: 25
-        },
-        bCopter: {
-          primary: null,
-          secondary: 7
-        },
-        tCopter: {
-          primary: null,
-          secondary: 30
-        },
+        infantry: new WW.Data.DamageChart(null,55),
+        mech: new WW.Data.DamageChart(null,45),
+        recon: new WW.Data.DamageChart(null,12),
+        tank: new WW.Data.DamageChart(null,5),
+        mediumTank: new WW.Data.DamageChart(null,1),
+        neoTank: new WW.Data.DamageChart(null,1),
+        apc: new WW.Data.DamageChart(null,14),
+        artillery: new WW.Data.DamageChart(null,15),
+        rockets: new WW.Data.DamageChart(null,25),
+        antiAir: new WW.Data.DamageChart(null,5),
+        missiles: new WW.Data.DamageChart(null,25),
+        fighter: null,
+        bomber: null,
+        bCopter: new WW.Data.DamageChart(null,7),
+        tCopter: new WW.Data.DamageChart(null,30),
+        battleship: null,
+        cruiser: null,
+        lander: null,
+        submarine: null,
       };
-      this.fuel = 99;
-      this.image = WW.Controllers.ImageManager.loadedImages.infantry[this.team];
-      this.viewRight = true;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.canCapture = true;
     }
   },
   mech: class Mech extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
       this.type = 'land';
+      this.movementType = 'mech';
       this.cost = 3000;
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        mountain: 1,
-        river: 1,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
       this.movement = 2;
       this.vision = 2;
       this.damageChart = {
-        infantry: {
-          primary: null,
-          secondary: 65
-        },
-        mech: {
-          primary: null,
-          secondary: 55
-        },
-        recon: {
-          primary: 85,
-          secondary: 18
-        },
-        tank: {
-          primary: 55,
-          secondary: 6
-        },
-        mediumTank: {
-          primary: 15,
-          secondary: 1
-        },
-        apc: {
-          primary: 75,
-          secondary: 20
-        },
-        artillery: {
-          primary: 70,
-          secondary: 32
-        },
-        rockets: {
-          primary: 85,
-          secondary: 35
-        },
-        antiAir: {
-          primary: 65,
-          secondary: 6
-        },
-        missiles: {
-          primary: 85,
-          secondary: 35
-        },
-        bCopter: {
-          primary: null,
-          secondary: 9
-        },
-        tCopter: {
-          primary: null,
-          secondary: 35
-        },
+        infantry: new WW.Data.DamageChart(null,65),
+        mech: new WW.Data.DamageChart(null,55),
+        recon: new WW.Data.DamageChart(85,18),
+        tank: new WW.Data.DamageChart(55,6),
+        mediumTank: new WW.Data.DamageChart(15,1),
+        neoTank: new WW.Data.DamageChart(15,1),
+        apc: new WW.Data.DamageChart(75,20),
+        artillery: new WW.Data.DamageChart(70,32),
+        rockets: new WW.Data.DamageChart(85,35),
+        antiAir: new WW.Data.DamageChart(65,6),
+        missiles: new WW.Data.DamageChart(85,35),
+        fighter: null,
+        bomber: null,
+        bCopter: new WW.Data.DamageChart(null,9),
+        tCopter: new WW.Data.DamageChart(null,35),
+        battleship: null,
+        cruiser: null,
+        lander: null,
+        submarine: null,
       };
-      this.fuel = 99;
-      this.ammo = 9;
+      this.fuel = 70;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.ammo = 3;
+      this.canCapture = true;
     }
   },
   apc: class APC extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
       this.type = 'land';
+      this.movementType = 'treads';
       this.cost = 5000;
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
       this.movement = 6;
       this.vision = 1;
-      this.damageChart = null;
+      this.damageChart = {
+        infantry: null,
+        mech: null,
+        recon: null,
+        tank: null,
+        mediumTank: null,
+        neoTank: null,
+        apc: null,
+        artillery: null,
+        rockets: null,
+        antiAir: null,
+        missiles: null,
+        fighter: null,
+        bomber: null,
+        bCopter: null,
+        tCopter: null,
+        battleship: null,
+        cruiser: null,
+        lander: null,
+        submarine: null,
+      };
       this.fuel = 70;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.range = [0];
+      this.canSupply = true;
+      this.canCharge = true;
+      this.canJoin = false;
+      this.maxCharge = 1;
+      this.charge = [];
     }
   },
   recon: class Recon extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
-      this.cost = 4000;
       this.type = 'land';
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
+      this.movementType = 'tires';
+      this.cost = 4000;
       this.movement = 8;
       this.vision = 5;
       this.damageChart = {
-        infantry: {
-          primary: null,
-          secondary: 70
-        },
-        mech: {
-          primary: null,
-          secondary: 65
-        },
-        recon: {
-          primary: null,
-          secondary: 35
-        },
-        tank: {
-          primary: null,
-          secondary: 6
-        },
-        mediumTank: {
-          primary: null,
-          secondary: 1
-        },
-        apc: {
-          primary: null,
-          secondary: 45
-        },
-        artillery: {
-          primary: null,
-          secondary: 45
-        },
-        rockets: {
-          primary: null,
-          secondary: 55
-        },
-        antiAir: {
-          primary: null,
-          secondary: 4
-        },
-        missiles: {
-          primary: null,
-          secondary: 28
-        },
-        bCopter: {
-          primary: null,
-          secondary: 10
-        },
-        tCopter: {
-          primary: null,
-          secondary: 35
-        },
+        infantry: new WW.Data.DamageChart(null,70),
+        mech: new WW.Data.DamageChart(null,65),
+        recon: new WW.Data.DamageChart(null,35),
+        tank: new WW.Data.DamageChart(null,6),
+        mediumTank: new WW.Data.DamageChart(null,1),
+        neoTank: new WW.Data.DamageChart(null,1),
+        apc: new WW.Data.DamageChart(null,45),
+        artillery: new WW.Data.DamageChart(null,45),
+        rockets: new WW.Data.DamageChart(null,55),
+        antiAir: new WW.Data.DamageChart(null,4),
+        missiles: new WW.Data.DamageChart(null,28),
+        fighter: null,
+        bomber: null,
+        bCopter: new WW.Data.DamageChart(null,10),
+        tCopter: new WW.Data.DamageChart(null,35),
+        battleship: null,
+        cruiser: null,
+        lander: null,
+        submarine: null,
       };
-      this.fuel = 99;
+      this.fuel = 80;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.range = [1];
     }
   },
   tank: class Tank extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
-      this.cost = 7000;
       this.type = 'land';
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
+      this.movementType = 'treads';
+      this.cost = 7000;
       this.movement = 6;
       this.vision = 3;
       this.damageChart = {
-        infantry: {
-          primary: 25,
-          secondary: 75
-        },
-        mech: {
-          primary: 25,
-          secondary: 70
-        },
-        recon: {
-          primary: 85,
-          secondary: 40
-        },
-        tank: {
-          primary: 55,
-          secondary: 6
-        },
-        mediumTank: {
-          primary: 15,
-          secondary: 1
-        },
-        apc: {
-          primary: 75,
-          secondary: 45
-        },
-        artillery: {
-          primary: 70,
-          secondary: 45
-        },
-        rockets: {
-          primary: 85,
-          secondary: 55
-        },
-        antiAir: {
-          primary: 65,
-          secondary: 5
-        },
-        missiles: {
-          primary: 85,
-          secondary: 35
-        },
-        bCopter: {
-          primary: null,
-          secondary: 10
-        },
-        tCopter: {
-          primary: null,
-          secondary: 40
-        },
-        battleship: {
-          primary: 1,
-          secondary: null
-        },
-        cruiser: {
-          primary: 5,
-          secondary: null,
-        },
-        lander: {
-          primary: 10,
-          secondary: null,
-        },
-        submarine: {
-          primary: 1,
-          secondary: null,
-        }
+        infantry: new WW.Data.DamageChart(25,75),
+        mech: new WW.Data.DamageChart(25,70),
+        recon: new WW.Data.DamageChart(85,40),
+        tank: new WW.Data.DamageChart(55,6),
+        mediumTank: new WW.Data.DamageChart(15,1),
+        neoTank: new WW.Data.DamageChart(15,1),
+        apc: new WW.Data.DamageChart(75,45),
+        artillery: new WW.Data.DamageChart(70,45),
+        rockets: new WW.Data.DamageChart(85,55),
+        antiAir: new WW.Data.DamageChart(65,5),
+        missiles: new WW.Data.DamageChart(85,30),
+        fighter: null,
+        bomber: null,
+        bCopter: new WW.Data.DamageChart(null,10),
+        tCopter: new WW.Data.DamageChart(null,40),
+        battleship: new WW.Data.DamageChart(1,null),
+        cruiser: new WW.Data.DamageChart(5,null),
+        lander: new WW.Data.DamageChart(10, null),
+        submarine: new WW.Data.DamageChart(1,null),
       };
-      this.fuel = 99;
+      this.fuel = 70;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
       this.ammo = 9;
+      this.range = [1];
     }
   },
   mediumTank: class MediumTank extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
-      this.cost = 16000;
       this.type = 'land';
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
-      this.movement = 3;
-      this.vision = 3;
+      this.movementType = 'treads';
+      this.cost = 16000;
+      this.movement = 5;
+      this.vision = 1;
       this.damageChart = {
-        infantry: {
-          primary: 30,
-          secondary: 105
-        },
-        mech: {
-          primary: 30,
-          secondary: 95
-        },
-        recon: {
-          primary: 105,
-          secondary: 45
-        },
-        tank: {
-          primary: 85,
-          secondary: 8
-        },
-        mediumTank: {
-          primary: 55,
-          secondary: 1
-        },
-        apc: {
-          primary: 105,
-          secondary: 45
-        },
-        artillery: {
-          primary: 105,
-          secondary: 45
-        },
-        rockets: {
-          primary: 105,
-          secondary: 55
-        },
-        antiAir: {
-          primary: 105,
-          secondary: 7
-        },
-        missiles: {
-          primary: 105,
-          secondary: 35
-        },
-        bCopter: {
-          primary: null,
-          secondary: 12
-        },
-        tCopter: {
-          primary: null,
-          secondary: 45
-        },
-        battleship: {
-          primary: 10,
-          secondary: null
-        },
-        cruiser: {
-          primary: 45,
-          secondary: null,
-        },
-        lander: {
-          primary: 35,
-          secondary: null,
-        },
-        submarine: {
-          primary: 10,
-          secondary: null,
-        },
+        infantry: new WW.Data.DamageChart(30,105),
+        mech: new WW.Data.DamageChart(30,95),
+        recon: new WW.Data.DamageChart(105,45),
+        tank: new WW.Data.DamageChart(85,8),
+        mediumTank: new WW.Data.DamageChart(55,1),
+        neoTank: new WW.Data.DamageChart(45,1),
+        apc: new WW.Data.DamageChart(105,45),
+        artillery: new WW.Data.DamageChart(105,45),
+        rockets: new WW.Data.DamageChart(105,55),
+        antiAir: new WW.Data.DamageChart(105,7),
+        missiles: new WW.Data.DamageChart(105,35),
+        fighter: null,
+        bomber: null,
+        bCopter: new WW.Data.DamageChart(null,12),
+        tCopter: new WW.Data.DamageChart(null,45),
+        battleship: new WW.Data.DamageChart(10,null),
+        cruiser: new WW.Data.DamageChart(55,null),
+        lander: new WW.Data.DamageChart(35,null),
+        submarine: new WW.Data.DamageChart(10,null),
       };
-      this.fuel = 99;
+      this.fuel = 50;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.ammo = 8;
+      this.range = [1];
     }
   },
-  // Falta
   neoTank: class NeoTank extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
-      this.cost = 1000;
       this.type = 'land';
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        mountain: 2,
-        river: 2,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
-      this.movement = 3;
-      this.vision = 3;
+      this.movementType = 'treads';
+      this.cost = 22000;
+      this.movement = 6;
+      this.vision = 1;
       this.damageChart = {
-        infantry: {
-          primary: null,
-          secondary: 55
-        },
-        mech: {
-          primary: null,
-          secondary: 45
-        },
-        recon: {
-          primary: null,
-          secondary: 12
-        },
-        tank: {
-          primary: null,
-          secondary: 5
-        },
-        mediumTank: {
-          primary: null,
-          secondary: 1
-        },
-        apc: {
-          primary: null,
-          secondary: 14
-        },
-        artillery: {
-          primary: null,
-          secondary: 15
-        },
-        rockets: {
-          primary: null,
-          secondary: 25
-        },
-        antiAir: {
-          primary: null,
-          secondary: 5
-        },
-        missiles: {
-          primary: null,
-          secondary: 25
-        },
-        bCopter: {
-          primary: null,
-          secondary: 7
-        },
-        tCopter: {
-          primary: null,
-          secondary: 30
-        },
+        infantry: new WW.Data.DamageChart(30,125),
+        mech: new WW.Data.DamageChart(30,115),
+        recon: new WW.Data.DamageChart(125,45),
+        tank: new WW.Data.DamageChart(105,8),
+        mediumTank: new WW.Data.DamageChart(75,1),
+        neoTank: new WW.Data.DamageChart(55,1),
+        apc: new WW.Data.DamageChart(125,45),
+        artillery: new WW.Data.DamageChart(115,45),
+        rockets: new WW.Data.DamageChart(125,55),
+        antiAir: new WW.Data.DamageChart(115,7),
+        missiles: new WW.Data.DamageChart(125,35),
+        fighter: null,
+        bomber: null,
+        bCopter: new WW.Data.DamageChart(22,12),
+        tCopter: new WW.Data.DamageChart(55,45),
+        battleship: new WW.Data.DamageChart(15,null),
+        cruiser: new WW.Data.DamageChart(40,null),
+        lander: new WW.Data.DamageChart(50,null),
+        submarine: new WW.Data.DamageChart(15,null),
       };
-      this.fuel = 99;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.ammo = 9;
+      this.range = [1];
     }
   },
   artillery: class Artillery extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
-      this.cost = 6000;
       this.type = 'land';
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
+      this.movementType = 'treads';
+      this.cost = 6000;
       this.movement = 5;
       this.vision = 1;
-      this.range = [2, 3];
       this.damageChart = {
-        infantry: {
-          primary: 90,
-          secondary: null
-        },
-        mech: {
-          primary: 85,
-          secondary: null
-        },
-        recon: {
-          primary: 80,
-          secondary: null
-        },
-        tank: {
-          primary: 70,
-          secondary: null
-        },
-        mediumTank: {
-          primary: 45,
-          secondary: null
-        },
-        apc: {
-          primary: 70,
-          secondary: null
-        },
-        artillery: {
-          primary: 75,
-          secondary: null
-        },
-        rockets: {
-          primary: 80,
-          secondary: null
-        },
-        antiAir: {
-          primary: 75,
-          secondary: null
-        },
-        missiles: {
-          primary: 80,
-          secondary: null
-        },
-        battleship: {
-          primary: 40,
-          secondary: null
-        },
-        cruiser: {
-          primary: 65,
-          secondary: null,
-        },
-        lander: {
-          primary: 55,
-          secondary: null,
-        },
-        submarine: {
-          primary: 60,
-          secondary: null,
-        },
+        infantry: new WW.Data.DamageChart(90,null),
+        mech: new WW.Data.DamageChart(85,null),
+        recon: new WW.Data.DamageChart(80,null),
+        tank: new WW.Data.DamageChart(70,null),
+        mediumTank: new WW.Data.DamageChart(45,null),
+        neoTank: new WW.Data.DamageChart(40,null),
+        apc: new WW.Data.DamageChart(70,null),
+        artillery: new WW.Data.DamageChart(75,null),
+        rockets: new WW.Data.DamageChart(80,null),
+        antiAir: new WW.Data.DamageChart(75,null),
+        missiles: new WW.Data.DamageChart(80,null),
+        fighter: null,
+        bomber: null,
+        bCopter: null,
+        tCopter: null,
+        battleship: new WW.Data.DamageChart(40,null),
+        cruiser: new WW.Data.DamageChart(65,null),
+        lander: new WW.Data.DamageChart(55,null),
+        submarine: new WW.Data.DamageChart(60,null),
       };
       this.fuel = 50;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.ammo = 9;
+      this.range = [2,3];
     }
   },
   rockets: class Rockets extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
-      this.cost = 16000;
       this.type = 'land';
-      this.range = [3, 4, 5];
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
-      this.movement = 3;
-      this.vision = 3;
+      this.movementType = 'tires';
+      this.cost = 15000;
+      this.movement = 5;
+      this.vision = 1;
       this.damageChart = {
-        infantry: {
-          primary: 95,
-          secondary: null
-        },
-        mech: {
-          primary: 90,
-          secondary: null
-        },
-        recon: {
-          primary: 90,
-          secondary: null
-        },
-        tank: {
-          primary: 80,
-          secondary: null
-        },
-        mediumTank: {
-          primary: 55,
-          secondary: null
-        },
-        apc: {
-          primary: 80,
-          secondary: null
-        },
-        artillery: {
-          primary: 80,
-          secondary: null
-        },
-        rockets: {
-          primary: 85,
-          secondary: null
-        },
-        antiAir: {
-          primary: 85,
-          secondary: null
-        },
-        missiles: {
-          primary: 90,
-          secondary: null
-        },
-        battleship: {
-          primary: 55,
-          secondary: null
-        },
-        cruiser: {
-          primary: 85,
-          secondary: null,
-        },
-        lander: {
-          primary: 60,
-          secondary: null,
-        },
-        submarine: {
-          primary: 85,
-          secondary: null,
-        },
+        infantry: new WW.Data.DamageChart(95,null),
+        mech: new WW.Data.DamageChart(90,null),
+        recon: new WW.Data.DamageChart(90,null),
+        tank: new WW.Data.DamageChart(80,null),
+        mediumTank: new WW.Data.DamageChart(55,null),
+        neoTank: new WW.Data.DamageChart(50,null),
+        apc: new WW.Data.DamageChart(80,null),
+        artillery: new WW.Data.DamageChart(80,null),
+        rockets: new WW.Data.DamageChart(85,null),
+        antiAir: new WW.Data.DamageChart(85,null),
+        missiles: new WW.Data.DamageChart(90,null),
+        fighter: null,
+        bomber: null,
+        bCopter: null,
+        tCopter: null,
+        battleship: new WW.Data.DamageChart(55,null),
+        cruiser: new WW.Data.DamageChart(85,null),
+        lander: new WW.Data.DamageChart(60,null),
+        submarine: new WW.Data.DamageChart(85,null),
       };
       this.fuel = 50;
-      this.ammo = 5;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.ammo = 6;
+      this.range = [3,4,5];
     }
   },
   antiAir: class AntiAir extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
-      this.cost = 8000;
       this.type = 'land';
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
-      this.movement = 3;
-      this.vision = 3;
+      this.movementType = 'treads';
+      this.cost = 8000;
+      this.movement = 6;
+      this.vision = 2;
       this.damageChart = {
-        infantry: {
-          primary: 105,
-          secondary: null
-        },
-        mech: {
-          primary: 105,
-          secondary: null
-        },
-        recon: {
-          primary: 60,
-          secondary: null
-        },
-        tank: {
-          primary: 25,
-          secondary: null
-        },
-        mediumTank: {
-          primary: 10,
-          secondary: null
-        },
-        apc: {
-          primary: null,
-          secondary: 14
-        },
-        artillery: {
-          primary: null,
-          secondary: 15
-        },
-        rockets: {
-          primary: null,
-          secondary: 25
-        },
-        antiAir: {
-          primary: null,
-          secondary: 5
-        },
-        missiles: {
-          primary: null,
-          secondary: 25
-        },
-        bCopter: {
-          primary: null,
-          secondary: 7
-        },
-        tCopter: {
-          primary: null,
-          secondary: 30
-        },
+        infantry: new WW.Data.DamageChart(105,null),
+        mech: new WW.Data.DamageChart(105,null),
+        recon: new WW.Data.DamageChart(60,null),
+        tank: new WW.Data.DamageChart(25,null),
+        mediumTank: new WW.Data.DamageChart(10,null),
+        neoTank: new WW.Data.DamageChart(5,null),
+        apc: new WW.Data.DamageChart(50,null),
+        artillery: new WW.Data.DamageChart(50,null),
+        rockets: new WW.Data.DamageChart(55,null),
+        antiAir: new WW.Data.DamageChart(45,null),
+        missiles: new WW.Data.DamageChart(55,null),
+        fighter: new WW.Data.DamageChart(65,null),
+        bomber: new WW.Data.DamageChart(75,null),
+        bCopter: new WW.Data.DamageChart(120,null),
+        tCopter: new WW.Data.DamageChart(120,null),
+        battleship: null,
+        cruiser: null,
+        lander: null,
+        submarine: null,
       };
-      this.fuel = 99;
+      this.fuel = 60;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.ammo = 9;
+      this.range = [1];
     }
   },
   missiles: class Missiles extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
-      this.cost = 1000;
       this.type = 'land';
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        mountain: 2,
-        river: 2,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
-      this.movement = 3;
-      this.vision = 3;
+      this.movementType = 'treads';
+      this.cost = 12000;
+      this.movement = 4;
+      this.vision = 5;
       this.damageChart = {
-        infantry: {
-          primary: null,
-          secondary: 55
-        },
-        mech: {
-          primary: null,
-          secondary: 45
-        },
-        recon: {
-          primary: null,
-          secondary: 12
-        },
-        tank: {
-          primary: null,
-          secondary: 5
-        },
-        mediumTank: {
-          primary: null,
-          secondary: 1
-        },
-        apc: {
-          primary: null,
-          secondary: 14
-        },
-        artillery: {
-          primary: null,
-          secondary: 15
-        },
-        rockets: {
-          primary: null,
-          secondary: 25
-        },
-        antiAir: {
-          primary: null,
-          secondary: 5
-        },
-        missiles: {
-          primary: null,
-          secondary: 25
-        },
-        bCopter: {
-          primary: null,
-          secondary: 7
-        },
-        tCopter: {
-          primary: null,
-          secondary: 30
-        },
+        infantry: null,
+        mech: null,
+        recon: null,
+        tank: null,
+        mediumTank: null,
+        neoTank: null,
+        apc: null,
+        artillery: null,
+        rockets: null,
+        antiAir: null,
+        missiles: null,
+        fighter: new WW.Data.DamageChart(100,null),
+        bomber: new WW.Data.DamageChart(100,null),
+        bCopter: new WW.Data.DamageChart(120,null),
+        tCopter: new WW.Data.DamageChart(120,null),
+        battleship: null,
+        cruiser: null,
+        lander: null,
+        submarine: null,
       };
-      this.fuel = 99;
+      this.fuel = 50;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.ammo = 6;
+      this.range = [3,4,5];
     }
   },
   fighter: class Fighter extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
-      this.cost = 1000;
-      this.type = 'land';
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        mountain: 2,
-        river: 2,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
-      this.movement = 3;
-      this.vision = 3;
+      this.type = 'air';
+      this.movementType = 'air';
+      this.cost = 20000;
+      this.movement = 9;
+      this.vision = 2;
       this.damageChart = {
-        infantry: {
-          primary: null,
-          secondary: 55
-        },
-        mech: {
-          primary: null,
-          secondary: 45
-        },
-        recon: {
-          primary: null,
-          secondary: 12
-        },
-        tank: {
-          primary: null,
-          secondary: 5
-        },
-        mediumTank: {
-          primary: null,
-          secondary: 1
-        },
-        apc: {
-          primary: null,
-          secondary: 14
-        },
-        artillery: {
-          primary: null,
-          secondary: 15
-        },
-        rockets: {
-          primary: null,
-          secondary: 25
-        },
-        antiAir: {
-          primary: null,
-          secondary: 5
-        },
-        missiles: {
-          primary: null,
-          secondary: 25
-        },
-        bCopter: {
-          primary: null,
-          secondary: 7
-        },
-        tCopter: {
-          primary: null,
-          secondary: 30
-        },
+        infantry: null,
+        mech: null,
+        recon: null,
+        tank: null,
+        mediumTank: null,
+        neoTank: null,
+        apc: null,
+        artillery: null,
+        rockets: null,
+        antiAir: null,
+        missiles: null,
+        fighter: new WW.Data.DamageChart(55,null),
+        bomber: new WW.Data.DamageChart(100,null),
+        bCopter: new WW.Data.DamageChart(100,null),
+        tCopter: new WW.Data.DamageChart(100,null),
+        battleship: null,
+        cruiser: null,
+        lander: null,
+        submarine: null,
       };
-      this.fuel = 99;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.ammo = 9;
+      this.range = [1];
     }
   },
   bomber: class Bomber extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
-      this.cost = 1000;
-      this.type = 'land';
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        mountain: 2,
-        river: 2,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
-      this.movement = 3;
-      this.vision = 3;
+      this.type = 'air';
+      this.movementType = 'air';
+      this.cost = 22000;
+      this.movement = 7;
+      this.vision = 2;
       this.damageChart = {
-        infantry: {
-          primary: null,
-          secondary: 55
-        },
-        mech: {
-          primary: null,
-          secondary: 45
-        },
-        recon: {
-          primary: null,
-          secondary: 12
-        },
-        tank: {
-          primary: null,
-          secondary: 5
-        },
-        mediumTank: {
-          primary: null,
-          secondary: 1
-        },
-        apc: {
-          primary: null,
-          secondary: 14
-        },
-        artillery: {
-          primary: null,
-          secondary: 15
-        },
-        rockets: {
-          primary: null,
-          secondary: 25
-        },
-        antiAir: {
-          primary: null,
-          secondary: 5
-        },
-        missiles: {
-          primary: null,
-          secondary: 25
-        },
-        bCopter: {
-          primary: null,
-          secondary: 7
-        },
-        tCopter: {
-          primary: null,
-          secondary: 30
-        },
+        infantry: new WW.Data.DamageChart(110,null),
+        mech: new WW.Data.DamageChart(110,null),
+        recon: new WW.Data.DamageChart(105,null),
+        tank: new WW.Data.DamageChart(105,null),
+        mediumTank: new WW.Data.DamageChart(95,null),
+        neoTank: new WW.Data.DamageChart(90,null),
+        apc: new WW.Data.DamageChart(105,null),
+        artillery: new WW.Data.DamageChart(105,null),
+        rockets: new WW.Data.DamageChart(105,null),
+        antiAir: new WW.Data.DamageChart(95,null),
+        missiles: new WW.Data.DamageChart(105,null),
+        fighter: null,
+        bomber: null,
+        bCopter: null,
+        tCopter: null,
+        battleship: new WW.Data.DamageChart(75,null),
+        cruiser: new WW.Data.DamageChart(85,null),
+        lander: new WW.Data.DamageChart(95,null),
+        submarine: new WW.Data.DamageChart(95,null),
       };
       this.fuel = 99;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.ammo = 9;
+      this.range = [1];
     }
   },
   bCopter: class BCopter extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
-      this.cost = 1000;
-      this.type = 'land';
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        mountain: 2,
-        river: 2,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
-      this.movement = 3;
+      this.type = 'air';
+      this.movementType = 'air';
+      this.cost = 9000;
+      this.movement = 6;
       this.vision = 3;
       this.damageChart = {
-        infantry: {
-          primary: null,
-          secondary: 55
-        },
-        mech: {
-          primary: null,
-          secondary: 45
-        },
-        recon: {
-          primary: null,
-          secondary: 12
-        },
-        tank: {
-          primary: null,
-          secondary: 5
-        },
-        mediumTank: {
-          primary: null,
-          secondary: 1
-        },
-        apc: {
-          primary: null,
-          secondary: 14
-        },
-        artillery: {
-          primary: null,
-          secondary: 15
-        },
-        rockets: {
-          primary: null,
-          secondary: 25
-        },
-        antiAir: {
-          primary: null,
-          secondary: 5
-        },
-        missiles: {
-          primary: null,
-          secondary: 25
-        },
-        bCopter: {
-          primary: null,
-          secondary: 7
-        },
-        tCopter: {
-          primary: null,
-          secondary: 30
-        },
+        infantry: new WW.Data.DamageChart(null,75),
+        mech: new WW.Data.DamageChart(null,75),
+        recon: new WW.Data.DamageChart(55,30),
+        tank: new WW.Data.DamageChart(55,6),
+        mediumTank: new WW.Data.DamageChart(25,1),
+        neoTank: new WW.Data.DamageChart(20,1),
+        apc: new WW.Data.DamageChart(60,20),
+        artillery: new WW.Data.DamageChart(65,25),
+        rockets: new WW.Data.DamageChart(65,35),
+        antiAir: new WW.Data.DamageChart(25,6),
+        missiles: new WW.Data.DamageChart(65,35),
+        bCopter: new WW.Data.DamageChart(65,null),
+        tCopter: new WW.Data.DamageChart(95,null),
+        battleship: new WW.Data.DamageChart(25,null),
+        cruiser: new WW.Data.DamageChart(55,null),
+        lander: new WW.Data.DamageChart(25,null),
+        submarine: new WW.Data.DamageChart(25,null),
       };
       this.fuel = 99;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.ammo = 6;
+      this.range = [1];
     }
   },
   tCopter: class TCopter extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
-      this.cost = 1000;
-      this.type = 'land';
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        mountain: 2,
-        river: 2,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
-      this.movement = 3;
-      this.vision = 3;
+      this.type = 'air';
+      this.movementType = 'air';
+      this.cost = 5000;
+      this.movement = 6;
+      this.vision = 2;
       this.damageChart = {
-        infantry: {
-          primary: null,
-          secondary: 55
-        },
-        mech: {
-          primary: null,
-          secondary: 45
-        },
-        recon: {
-          primary: null,
-          secondary: 12
-        },
-        tank: {
-          primary: null,
-          secondary: 5
-        },
-        mediumTank: {
-          primary: null,
-          secondary: 1
-        },
-        apc: {
-          primary: null,
-          secondary: 14
-        },
-        artillery: {
-          primary: null,
-          secondary: 15
-        },
-        rockets: {
-          primary: null,
-          secondary: 25
-        },
-        antiAir: {
-          primary: null,
-          secondary: 5
-        },
-        missiles: {
-          primary: null,
-          secondary: 25
-        },
-        bCopter: {
-          primary: null,
-          secondary: 7
-        },
-        tCopter: {
-          primary: null,
-          secondary: 30
-        },
+        infantry: null,
+        mech: null,
+        recon: null,
+        tank: null,
+        mediumTank: null,
+        neoTank: null,
+        apc: null,
+        artillery: null,
+        rockets: null,
+        antiAir: null,
+        missiles: null,
+        fighter: null,
+        bomber: null,
+        bCopter: null,
+        tCopter: null,
+        battleship: null,
+        cruiser: null,
+        lander: null,
+        submarine: null,
       };
       this.fuel = 99;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.range = [0];
+      this.canCharge = true;
+      this.charge = [];
+      this.maxCharge = 1;
     }
   },
   battleship: class Battleship extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
-      this.cost = 1000;
-      this.type = 'land';
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        mountain: 2,
-        river: 2,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
-      this.movement = 3;
-      this.vision = 3;
+      this.type = 'sea';
+      this.movementType = 'ships';
+      this.cost = 28000;
+      this.movement = 5;
+      this.vision = 2;
       this.damageChart = {
-        infantry: {
-          primary: null,
-          secondary: 55
-        },
-        mech: {
-          primary: null,
-          secondary: 45
-        },
-        recon: {
-          primary: null,
-          secondary: 12
-        },
-        tank: {
-          primary: null,
-          secondary: 5
-        },
-        mediumTank: {
-          primary: null,
-          secondary: 1
-        },
-        apc: {
-          primary: null,
-          secondary: 14
-        },
-        artillery: {
-          primary: null,
-          secondary: 15
-        },
-        rockets: {
-          primary: null,
-          secondary: 25
-        },
-        antiAir: {
-          primary: null,
-          secondary: 5
-        },
-        missiles: {
-          primary: null,
-          secondary: 25
-        },
-        bCopter: {
-          primary: null,
-          secondary: 7
-        },
-        tCopter: {
-          primary: null,
-          secondary: 30
-        },
+        infantry: new WW.Data.DamageChart(95,null),
+        mech: new WW.Data.DamageChart(90,null),
+        recon: new WW.Data.DamageChart(90,null),
+        tank: new WW.Data.DamageChart(80,null),
+        mediumTank: new WW.Data.DamageChart(55,null),
+        neoTank: new WW.Data.DamageChart(50,null),
+        apc: new WW.Data.DamageChart(80,null),
+        artillery: new WW.Data.DamageChart(80,null),
+        rockets: new WW.Data.DamageChart(85,null),
+        antiAir: new WW.Data.DamageChart(85,null),
+        missiles: new WW.Data.DamageChart(90,null),
+        fighter: null,
+        bomber: null,
+        bCopter: null,
+        tCopter: null,
+        battleship: new WW.Data.DamageChart(50,null),
+        cruiser: new WW.Data.DamageChart(95,null),
+        lander: new WW.Data.DamageChart(95,null),
+        submarine: new WW.Data.DamageChart(95,null),
       };
       this.fuel = 99;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.ammo = 9;
+      this.range = [2,3,4,5,6];
     }
   },
   cruiser: class Cruiser extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
-      this.cost = 1000;
-      this.type = 'land';
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        mountain: 2,
-        river: 2,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
-      this.movement = 3;
+      this.type = 'sea';
+      this.movementType = 'ships';
+      this.cost = 18000;
+      this.movement = 6;
       this.vision = 3;
       this.damageChart = {
-        infantry: {
-          primary: null,
-          secondary: 55
-        },
-        mech: {
-          primary: null,
-          secondary: 45
-        },
-        recon: {
-          primary: null,
-          secondary: 12
-        },
-        tank: {
-          primary: null,
-          secondary: 5
-        },
-        mediumTank: {
-          primary: null,
-          secondary: 1
-        },
-        apc: {
-          primary: null,
-          secondary: 14
-        },
-        artillery: {
-          primary: null,
-          secondary: 15
-        },
-        rockets: {
-          primary: null,
-          secondary: 25
-        },
-        antiAir: {
-          primary: null,
-          secondary: 5
-        },
-        missiles: {
-          primary: null,
-          secondary: 25
-        },
-        bCopter: {
-          primary: null,
-          secondary: 7
-        },
-        tCopter: {
-          primary: null,
-          secondary: 30
-        },
+        infantry: null,
+        mech: null,
+        recon: null,
+        tank: null,
+        mediumTank: null,
+        neoTank: null,
+        apc: null,
+        artillery: null,
+        rockets: null,
+        antiAir: null,
+        missiles: null,
+        fighter: new WW.Data.DamageChart(55,null),
+        bomber: new WW.Data.DamageChart(65,null),
+        bCopter: new WW.Data.DamageChart(115,null),
+        tCopter: new WW.Data.DamageChart(115,null),
+        battleship: null,
+        cruiser: null,
+        lander: null,
+        submarine: new WW.Data.DamageChart(90,null),
       };
       this.fuel = 99;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.ammo = 9;
+      this.range = [1];
     }
   },
   submarine: class Submarine extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
-      this.cost = 1000;
-      this.type = 'land';
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        mountain: 2,
-        river: 2,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
-      this.movement = 3;
-      this.vision = 3;
+      this.type = 'sea';
+      this.movementType = 'ships';
+      this.cost = 20000;
+      this.movement = 5;
+      this.vision = 5;
       this.damageChart = {
-        infantry: {
-          primary: null,
-          secondary: 55
-        },
-        mech: {
-          primary: null,
-          secondary: 45
-        },
-        recon: {
-          primary: null,
-          secondary: 12
-        },
-        tank: {
-          primary: null,
-          secondary: 5
-        },
-        mediumTank: {
-          primary: null,
-          secondary: 1
-        },
-        apc: {
-          primary: null,
-          secondary: 14
-        },
-        artillery: {
-          primary: null,
-          secondary: 15
-        },
-        rockets: {
-          primary: null,
-          secondary: 25
-        },
-        antiAir: {
-          primary: null,
-          secondary: 5
-        },
-        missiles: {
-          primary: null,
-          secondary: 25
-        },
-        bCopter: {
-          primary: null,
-          secondary: 7
-        },
-        tCopter: {
-          primary: null,
-          secondary: 30
-        },
+        infantry: null,
+        mech: null,
+        recon: null,
+        tank: null,
+        mediumTank: null,
+        neoTank: null,
+        apc: null,
+        artillery: null,
+        rockets: null,
+        antiAir: null,
+        missiles: null,
+        fighter: null,
+        bomber: null,
+        bCopter: null,
+        tCopter: null,
+        battleship: new WW.Data.DamageChart(55,null),
+        cruiser: new WW.Data.DamageChart(25,null),
+        lander: new WW.Data.DamageChart(95,null),
+        submarine: new WW.Data.DamageChart(55,null),
       };
-      this.fuel = 99;
+      this.fuel = 60;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.ammo = 6;
+      this.range = [1];
+      this.canSumerge = true;
+      this.isSumerged = false;
     }
   },
   lander: class Lander extends Unit{
     constructor(x,y, team = 'red'){
-      this.position = {x,y};
+      this.position = {x, y};
       this.team = team;
-      this.cost = 1000;
-      this.type = '';
-      this.movementCost = {
-        plain: 1,
-        wood: 1,
-        mountain: 2,
-        river: 2,
-        road: 1,
-        shoal: 1,
-        bridge: 1,
-        hq: 1,
-        city: 1,
-        base: 1,
-        airport: 1,
-        port: 1
-      };
-      this.health = 100;
-      this.movement = 3;
-      this.vision = 3;
+      this.type = 'sea';
+      this.movementType = 'trans';
+      this.cost = 12000;
+      this.movement = 6;
+      this.vision = 1;
       this.damageChart = {
-        infantry: {
-          primary: null,
-          secondary: 55
-        },
-        mech: {
-          primary: null,
-          secondary: 45
-        },
-        recon: {
-          primary: null,
-          secondary: 12
-        },
-        tank: {
-          primary: null,
-          secondary: 5
-        },
-        mediumTank: {
-          primary: null,
-          secondary: 1
-        },
-        apc: {
-          primary: null,
-          secondary: 14
-        },
-        artillery: {
-          primary: null,
-          secondary: 15
-        },
-        rockets: {
-          primary: null,
-          secondary: 25
-        },
-        antiAir: {
-          primary: null,
-          secondary: 5
-        },
-        missiles: {
-          primary: null,
-          secondary: 25
-        },
-        bCopter: {
-          primary: null,
-          secondary: 7
-        },
-        tCopter: {
-          primary: null,
-          secondary: 30
-        },
+        infantry: null,
+        mech: null,
+        recon: null,
+        tank: null,
+        mediumTank: null,
+        neoTank: null,
+        apc: null,
+        artillery: null,
+        rockets: null,
+        antiAir: null,
+        missiles: null,
+        fighter: null,
+        bomber: null,
+        bCopter: null,
+        tCopter: null,
+        battleship: null,
+        cruiser: null,
+        lander: null,
+        submarine: null,
       };
       this.fuel = 99;
+      this.image = new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/terrain.png', 0, 32, 16, 16);
+      this.range = [0];
+      this.canCharge = true;
+      this.maxCharge = 3;
+      this.charge = [];
     }
   },
   

@@ -31,6 +31,7 @@ WW.Data.Tiles = {
         air: 1,
       },
       defense: 4,
+      addVision: 3,
     },
     wood: {
       id: 3,
