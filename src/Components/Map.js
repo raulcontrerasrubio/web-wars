@@ -298,5 +298,65 @@ WW.Components.Map = class Map{
     document.querySelector('#next-turn').onclick = this.nextTurn.bind(this);
     document.querySelector('#team-panel').style.display = 'flex';
   }
+
+  createUnit(e){
+    let id = +e.target.parentNode.id.replace(/[^\d]/g, '');
+    let base = e.target.parentNode.id.split('-')[0];
+    let cost;
+    switch(base){
+      case 'air':
+        WW.Controllers.Keyboard.toggleAirMenu();
+        switch(id){
+          case 1:
+
+          break;
+          case 2:
+
+          break;
+          case 3:
+
+          break;
+          case 4:
+
+          break;
+        }
+      break;
+      case 'base':
+        WW.Controllers.Keyboard.toggleBaseMenu();
+        switch(id){
+          case 1:
+
+          break;
+          case 2:
+
+          break;
+          case 3:
+
+          break;
+          case 4:
+
+          break;
+        }
+      break;
+      case 'port':
+        WW.Controllers.Keyboard.togglePortMenu();
+        switch(id){
+          case 1:
+
+          break;
+          case 2:
+
+          break;
+          case 3:
+
+          break;
+          case 4:
+
+          break;
+        }
+      break;
+    }
+
+  }
   
 };

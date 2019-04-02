@@ -115,26 +115,28 @@ WW.Controllers.Keyboard = {
             this.validKeys.KEY_Q.pressed = false;
           break;
           case this.validKeys.ENTER_KEY.code:
-            let currentTurnTeamName = map.teams[map.teamTurnIndex].name;
-            switch(map.grid.grid[cameraPosition.y][cameraPosition.x]){
-              case 10:
-                if(map.buildings.filter(building => building instanceof WW.Data.Buildings.Base && building.position.x === cameraPosition.x && building.position.y === cameraPosition.y)[0].team === currentTurnTeamName){
-                  this.changeAffordableUnits();
-                  this.toggleBaseMenu();
-                }
-              break;
-              case 11:
-                if(map.buildings.filter(building => building instanceof WW.Data.Buildings.Airport && building.position.x === cameraPosition.x && building.position.y === cameraPosition.y)[0].team === currentTurnTeamName){
-                  this.changeAffordableUnits();
-                  this.toggleAirMenu();
-                }
-              break;
-              case 12:
-                if(map.buildings.filter(building => building instanceof WW.Data.Buildings.Port && building.position.x === cameraPosition.x && building.position.y === cameraPosition.y)[0].team === currentTurnTeamName){
-                  this.changeAffordableUnits();
-                  this.togglePortMenu();
-                }
-              break;
+            if(!WW.visibleRightMenu){
+              let currentTurnTeamName = map.teams[map.teamTurnIndex].name;
+              switch(map.grid.grid[cameraPosition.y][cameraPosition.x]){
+                case 10:
+                  if(map.buildings.filter(building => building instanceof WW.Data.Buildings.Base && building.position.x === cameraPosition.x && building.position.y === cameraPosition.y)[0].team === currentTurnTeamName){
+                    this.changeAffordableUnits();
+                    this.toggleBaseMenu();
+                  }
+                break;
+                case 11:
+                  if(map.buildings.filter(building => building instanceof WW.Data.Buildings.Airport && building.position.x === cameraPosition.x && building.position.y === cameraPosition.y)[0].team === currentTurnTeamName){
+                    this.changeAffordableUnits();
+                    this.toggleAirMenu();
+                  }
+                break;
+                case 12:
+                  if(map.buildings.filter(building => building instanceof WW.Data.Buildings.Port && building.position.x === cameraPosition.x && building.position.y === cameraPosition.y)[0].team === currentTurnTeamName){
+                    this.changeAffordableUnits();
+                    this.togglePortMenu();
+                  }
+                break;
+              }
             }
             this.validKeys.ENTER_KEY.pressed = false;
           break;
@@ -189,8 +191,10 @@ WW.Controllers.Keyboard = {
     for(let unit of units){
       if(+unit.textContent > availableFunds){
         unit.parentNode.classList += ' disabled';
+        unit.parentNode.onclick = null;
       }else{
         unit.parentNode.classList = 'unit';
+        unit.parentNode.onclick = map.createUnit;
       }
     }
   }
