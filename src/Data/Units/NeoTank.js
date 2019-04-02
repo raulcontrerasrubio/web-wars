@@ -1,5 +1,6 @@
 WW.Data.Units.NeoTank = class NeoTank extends WW.Data.Unit{
   constructor(x,y, team = 'red'){
+    super();
     this.position = {x, y};
     this.team = team;
     this.type = 'land';

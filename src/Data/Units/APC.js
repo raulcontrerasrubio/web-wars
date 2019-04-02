@@ -1,5 +1,6 @@
 WW.Data.Units.APC = class APC extends WW.Data.Unit{
   constructor(x,y, team = 'red'){
+    super();
     this.position = {x, y};
     this.team = team;
     this.type = 'land';

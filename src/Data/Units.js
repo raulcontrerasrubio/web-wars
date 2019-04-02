@@ -2,16 +2,16 @@ WW.Data.Units = {
   dataset: {
     infantry: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 16),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
-        black: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/black-units.png', 0, 0, 16, 18),
+        black: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/black-units.png', 0, 0, 16, 16),
       }
     },
     mech: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 16, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -20,7 +20,7 @@ WW.Data.Units = {
     },
     apc: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 32, 16, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -29,7 +29,7 @@ WW.Data.Units = {
     },
     recon: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 32, 0, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -38,7 +38,7 @@ WW.Data.Units = {
     },
     tank: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 16, 16, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -47,7 +47,7 @@ WW.Data.Units = {
     },
     mediumTank: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 16, 0, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -56,7 +56,7 @@ WW.Data.Units = {
     },
     neoTank: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 144, 0, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -65,7 +65,7 @@ WW.Data.Units = {
     },
     antiAir: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 64, 0, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -74,7 +74,7 @@ WW.Data.Units = {
     },
     artillery: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 48, 0, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -83,7 +83,7 @@ WW.Data.Units = {
     },
     rockets: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 48, 16, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -92,7 +92,7 @@ WW.Data.Units = {
     },
     missiles: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 64, 16, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -101,7 +101,7 @@ WW.Data.Units = {
     },
     fighter: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 80, 0, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -110,7 +110,7 @@ WW.Data.Units = {
     },
     bomber: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 80, 16, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -119,7 +119,7 @@ WW.Data.Units = {
     },
     bCopter: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 96, 0, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -128,7 +128,7 @@ WW.Data.Units = {
     },
     tCopter: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 96, 16, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -137,7 +137,7 @@ WW.Data.Units = {
     },
     battleship: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 112, 0, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -146,7 +146,7 @@ WW.Data.Units = {
     },
     cruiser: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 112, 16, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -155,7 +155,7 @@ WW.Data.Units = {
     },
     submarine: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 128, 16, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
@@ -164,7 +164,7 @@ WW.Data.Units = {
     },
     lander: {
       img: {
-        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 0, 0, 16, 18),
+        red: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/red-units.png', 128, 0, 16, 18),
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 0, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),

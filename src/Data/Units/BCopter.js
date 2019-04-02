@@ -1,5 +1,6 @@
 WW.Data.Units.BCopter = class BCopter extends WW.Data.Unit{
   constructor(x,y, team = 'red'){
+    super();
     this.position = {x, y};
     this.team = team;
     this.type = 'air';

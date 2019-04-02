@@ -55,7 +55,10 @@ WW.Data.Unit = class Unit{
     if(!this.viewRight){
       WW.ctx.scale(-1, 1);
     }
-    WW.ctx.drawImage(img.src, img.fromX, img.fromY, img.w, img.h, posX, posY - img.h+WW.Config.TILE_HEIGHT, img.w, img.h);
+    WW.ctx.drawImage(img.src, img.fromX, img.fromY, img.w, img.h, posX, posY, img.w, img.h);
     WW.ctx.restore();
+  }
+  toggleView(){
+    this.viewRight = !this.viewRight;
   }
 }
