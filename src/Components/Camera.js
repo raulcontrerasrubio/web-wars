@@ -18,6 +18,9 @@ WW.Components.Camera = class Camera{
     this.gridDimensions = gridDimensions;
     this.updateView();
   }
+  getAction(){
+    // Segun position.x y position.y
+  }
   draw(callback){
     WW.ctx.save();
     let {translateX, translateY, scale} = this.checkBounds();    

@@ -90,29 +90,46 @@ WW.Controllers.Keyboard = {
             camera.zoom += 5;
             this.validKeys.KEY_X.pressed = false;
           break;
-          case this.validKeys.ENTER_KEY.code:
-            this.validKeys.ENTER_KEY.pressed = false;
-          break;
         }
       }
     }
   },
   menuControls: function(){
     let map = WW.Components.maps[WW.Components.selectedMapIndex];
-
+    let cameraPosition = {x:map.cameras[map.selectedCameraIndex].position.x/16, y:map.cameras[map.selectedCameraIndex].position.y/16};
     for(let key in this.validKeys){
       if(this.validKeys[key].pressed){
         switch(this.validKeys[key].code){
           case this.validKeys.KEY_Q.code:
-            this.toggleRightMenu();
+            if(!WW.visibleBaseMenu && !WW.visibleAirMenu && !WW.visiblePortMenu){
+              this.toggleRightMenu();
+            }
             this.validKeys.KEY_Q.pressed = false;
+          break;
+          case this.validKeys.ENTER_KEY.code:
+            let currentTurnTeamName = map.teams[map.teamTurnIndex].name;
+            switch(map.grid.grid[cameraPosition.y][cameraPosition.x]){
+              case 10:
+                if(map.buildings.filter(building => building instanceof WW.Data.Buildings.Base && building.position.x === cameraPosition.x && building.position.y === cameraPosition.y)[0].team === currentTurnTeamName){
+                  this.toggleBaseMenu();
+                }
+              break;
+              case 11:
+                if(map.buildings.filter(building => building instanceof WW.Data.Buildings.Airport && building.position.x === cameraPosition.x && building.position.y === cameraPosition.y)[0].team === currentTurnTeamName){
+                  this.toggleAirMenu();
+                }
+              break;
+              case 12:
+                if(map.buildings.filter(building => building instanceof WW.Data.Buildings.Port && building.position.x === cameraPosition.x && building.position.y === cameraPosition.y)[0].team === currentTurnTeamName){
+                  this.togglePortMenu();
+                }
+              break;
+            }
+            this.validKeys.ENTER_KEY.pressed = false;
           break;
         }
       }
     }
-  },
-  select: function(cb){
-    cb();
   },
   toggleRightMenu: function(){
     let rightMenu = document.querySelector('#turn-menu');
@@ -122,6 +139,36 @@ WW.Controllers.Keyboard = {
     }else{
       rightMenu.style.display = 'flex';
       WW.visibleRightMenu = true;
+    }
+  },
+  toggleBaseMenu: function(){
+    let baseMenu = document.querySelector('#base-menu');
+    if(WW.visibleBaseMenu){
+      baseMenu.style.display = 'none';
+      WW.visibleBaseMenu = false;
+    }else{
+      baseMenu.style.display = 'flex';
+      WW.visibleBaseMenu = true;
+    }
+  },
+  toggleAirMenu: function(){
+    let airMenu = document.querySelector('#air-menu');
+    if(WW.visibleAirMenu){
+      airMenu.style.display = 'none';
+      WW.visibleAirMenu = false;
+    }else{
+      airMenu.style.display = 'flex';
+      WW.visibleAirMenu = true;
+    }
+  },
+  togglePortMenu: function(){
+    let portMenu = document.querySelector('#port-menu');
+    if(WW.visiblePortMenu){
+      portMenu.style.display = 'none';
+      WW.visiblePortMenu = false;
+    }else{
+      portMenu.style.display = 'flex';
+      WW.visiblePortMenu = true;
     }
   }
 };

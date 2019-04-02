@@ -171,5 +171,5 @@ WW.Data.Units = {
         black: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/black-units.png', 0, 0, 16, 18),
       }
     },
-  }  
+  },
 };
