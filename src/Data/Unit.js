@@ -31,6 +31,7 @@ WW.Data.Unit = class Unit{
     };
     this.fuel = 99;
     this.image = null;
+    this.used = false;
     this.viewRight = true;
     this.ammo = null;
     this.range = [1];
@@ -41,7 +42,7 @@ WW.Data.Unit = class Unit{
     this.canCapture = false;
   }
   getIntegerHealthPoints(){
-    return Math.ceil(this.health/100);
+    return Math.ceil(this.health/10);
   }
   move(){
 
@@ -52,6 +53,12 @@ WW.Data.Unit = class Unit{
     var posX = x * WW.Config.TILE_WIDTH;
     WW.ctx.save();
     WW.ctx.translate(x, y);
+    if(this.used){
+      WW.ctx.filter = 'saturate(30%)'
+    }
+    if(this.getIntegerHealthPoints() < 10){
+      this.printDamage();
+    }
     if(!this.viewRight){
       WW.ctx.scale(-1, 1);
     }
@@ -60,5 +67,12 @@ WW.Data.Unit = class Unit{
   }
   toggleView(){
     this.viewRight = !this.viewRight;
+  }
+  printDamage(){
+    WW.ctx.fillStyle = 'black';
+    WW.ctx.fillRect(0, WW.Config.TILE_HEIGHT - 5, 5, 5);
+    WW.ctx.fillStyle = 'white';
+    WW.ctx.font = '6px Arial';
+    WW.ctx.fillText(`${this.getIntegerHealthPoints()}`, 0, WW.Config.TILE_HEIGHT);
   }
 }
