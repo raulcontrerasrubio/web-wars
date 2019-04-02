@@ -47,7 +47,9 @@ WW.Data.Unit = class Unit{
 
   }
   draw(x, y){
-    let img = this.img;
+    let img = this.image;
+    var posY = y * WW.Config.TILE_HEIGHT;
+    var posX = x * WW.Config.TILE_WIDTH;
     WW.ctx.save();
     WW.ctx.translate(x, y);
     if(!this.viewRight){

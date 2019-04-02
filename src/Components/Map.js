@@ -23,7 +23,7 @@ WW.Components.Map = class Map{
   printAll(){
     this.drawTiles();
     this.cameras[this.selectedCameraIndex].printPosition();
-    // this.actors.forEach(actor => actor.draw());
+    this.printUnits();
   }
   drawTiles(){
     for(let i = this.cameras[this.selectedCameraIndex].view.top, rows = this.cameras[this.selectedCameraIndex].view.bottom; i < rows; i+= 1){
@@ -258,12 +258,6 @@ WW.Components.Map = class Map{
       var bg = WW.Controllers.ImageManager.loadedImages.plain;
       WW.ctx.drawImage(bg.src, bg.fromX, bg.fromY, bg.toX, bg.h, posX - bg.w+WW.Config.TILE_WIDTH, posY - bg.h+WW.Config.TILE_HEIGHT, bg.w, bg.h);
       WW.ctx.drawImage(img.src, img.fromX, img.fromY, img.w, img.h, posX, posY - img.h+WW.Config.TILE_HEIGHT, img.w, img.h);
-      // Print unit
-      // var actors = this.actors.filter(actor => actor.position.x === x && actor.position.y === y);
-      // for(let actor of actors){
-      //   actor.draw();
-      // }
-      
   }
 
   getTeamColor(x, y){
@@ -273,6 +267,10 @@ WW.Components.Map = class Map{
       }
     }
     return 'white';
+  }
+
+  printUnits(){
+    this.teams.map(team => team.units.forEach(unit => unit.draw(unit.position.x, unit.position.y)));
   }
 
   nextTurn(){
