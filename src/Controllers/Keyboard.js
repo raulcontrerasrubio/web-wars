@@ -119,16 +119,19 @@ WW.Controllers.Keyboard = {
             switch(map.grid.grid[cameraPosition.y][cameraPosition.x]){
               case 10:
                 if(map.buildings.filter(building => building instanceof WW.Data.Buildings.Base && building.position.x === cameraPosition.x && building.position.y === cameraPosition.y)[0].team === currentTurnTeamName){
+                  this.changeAffordableUnits();
                   this.toggleBaseMenu();
                 }
               break;
               case 11:
                 if(map.buildings.filter(building => building instanceof WW.Data.Buildings.Airport && building.position.x === cameraPosition.x && building.position.y === cameraPosition.y)[0].team === currentTurnTeamName){
+                  this.changeAffordableUnits();
                   this.toggleAirMenu();
                 }
               break;
               case 12:
                 if(map.buildings.filter(building => building instanceof WW.Data.Buildings.Port && building.position.x === cameraPosition.x && building.position.y === cameraPosition.y)[0].team === currentTurnTeamName){
+                  this.changeAffordableUnits();
                   this.togglePortMenu();
                 }
               break;
@@ -177,6 +180,18 @@ WW.Controllers.Keyboard = {
     }else{
       portMenu.style.display = 'flex';
       WW.visiblePortMenu = true;
+    }
+  },
+  changeAffordableUnits: function(){
+    let map = WW.Components.maps[WW.Components.selectedMapIndex];
+    let availableFunds = map.teams[map.teamTurnIndex].funds;
+    let units = document.querySelectorAll('#base-menu .unit:not(:first-child) .cost, #air-menu .unit:not(:first-child) .cost, #port-menu .unit:not(:first-child) .cost');
+    for(let unit of units){
+      if(+unit.textContent > availableFunds){
+        unit.parentNode.classList += ' disabled';
+      }else{
+        unit.parentNode.classList = 'unit';
+      }
     }
   }
 };

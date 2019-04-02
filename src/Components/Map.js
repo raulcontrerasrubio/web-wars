@@ -7,7 +7,8 @@ WW.Components.Map = class Map{
     this.teamTurnIndex = 0;
     this.buildings = [...grid.buildings];
     this.day = 1;
-    document.querySelector('#next-turn').onclick = this.nextTurn.bind(this);
+    this.loadTeamPanel();
+    this.loadEvents();
   }
   tileExists(x, y){
     try{
@@ -277,12 +278,25 @@ WW.Components.Map = class Map{
     WW.Controllers.Keyboard.toggleRightMenu();
     this.teamTurnIndex++;
     if(this.teamTurnIndex > this.teams.length - 1){
+      this.teams.forEach(team => {
+        let fundsIncrement = this.buildings.filter(building => building.team === team.name).length * 1000;
+        team.funds += fundsIncrement;
+      });
       this.teamTurnIndex = 0;
       this.day++;
-      console.log('Turn:', this.teams[this.teamTurnIndex].name, 'Day:', this.day);
-    }else{
-      console.log('Turn:', this.teams[this.teamTurnIndex].name, 'Day:', this.day);
     }
+    this.loadTeamPanel();
   }
 
+  loadTeamPanel(){
+    document.querySelector('#team-name').innerText = this.teams[this.teamTurnIndex].name;
+    document.querySelector('#team-funds').innerText = this.teams[this.teamTurnIndex].funds;
+    document.querySelector('#day').innerText = this.day;
+  }
+
+  loadEvents(){
+    document.querySelector('#next-turn').onclick = this.nextTurn.bind(this);
+    document.querySelector('#team-panel').style.display = 'flex';
+  }
+  
 };
