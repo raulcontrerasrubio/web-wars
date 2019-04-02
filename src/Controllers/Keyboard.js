@@ -67,20 +67,28 @@ WW.Controllers.Keyboard = {
       if(this.validKeys[key].pressed){
         switch(this.validKeys[key].code){
           case this.validKeys.UP_ARROW.code:
-            camera.moveUp();
-            this.validKeys.UP_ARROW.pressed = false;
+            if(!WW.visibleRightMenu && !WW.visibleBaseMenu && !WW.visibleAirMenu && !WW.visiblePortMenu){
+              camera.moveUp();
+              this.validKeys.UP_ARROW.pressed = false;
+            }
           break;
           case this.validKeys.DOWN_ARROW.code:
-            camera.moveDown();
-            this.validKeys.DOWN_ARROW.pressed = false;
+            if(!WW.visibleRightMenu && !WW.visibleBaseMenu && !WW.visibleAirMenu && !WW.visiblePortMenu){
+              camera.moveDown();
+              this.validKeys.DOWN_ARROW.pressed = false;
+            }
           break;
           case this.validKeys.RIGHT_ARROW.code:
-            camera.moveRight();
-            this.validKeys.RIGHT_ARROW.pressed = false;
+            if(!WW.visibleRightMenu && !WW.visibleBaseMenu && !WW.visibleAirMenu && !WW.visiblePortMenu){
+              camera.moveRight();
+              this.validKeys.RIGHT_ARROW.pressed = false;
+            }
           break;
           case this.validKeys.LEFT_ARROW.code:
-            camera.moveLeft();
-            this.validKeys.LEFT_ARROW.pressed = false;
+            if(!WW.visibleRightMenu && !WW.visibleBaseMenu && !WW.visibleAirMenu && !WW.visiblePortMenu){
+              camera.moveLeft();
+              this.validKeys.LEFT_ARROW.pressed = false;
+            }
           break;
           case this.validKeys.KEY_Z.code:
             camera.zoom -= 5;
