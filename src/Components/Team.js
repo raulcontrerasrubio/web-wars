@@ -7,4 +7,7 @@ WW.Components.Team = class Team{
   endTurn(){
     WW.Components.maps[WW.Components.getCurrentMap()].nextTurn();
   }
+  draw(){
+    this.units.forEach(unit => unit.draw());
+  }
 };

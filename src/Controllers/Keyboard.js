@@ -194,7 +194,7 @@ WW.Controllers.Keyboard = {
         unit.parentNode.onclick = null;
       }else{
         unit.parentNode.classList = 'unit';
-        unit.parentNode.onclick = map.createUnit;
+        unit.parentNode.onclick = map.createUnit.bind(map);
       }
     }
   }

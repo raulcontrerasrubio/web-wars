@@ -47,8 +47,10 @@ WW.Data.Unit = class Unit{
   move(){
 
   }
-  draw(x, y){
+  draw(){
     let img = this.image;
+    let x = this.position.x;
+    let y = this.position.y;
     var posY = y * WW.Config.TILE_HEIGHT;
     var posX = x * WW.Config.TILE_WIDTH;
     WW.ctx.save();

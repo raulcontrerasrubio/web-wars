@@ -24,7 +24,7 @@ WW.Components.Map = class Map{
   printAll(){
     this.drawTiles();
     this.cameras[this.selectedCameraIndex].printPosition();
-    this.printUnits();
+    this.teamDraw();
   }
   drawTiles(){
     for(let i = this.cameras[this.selectedCameraIndex].view.top, rows = this.cameras[this.selectedCameraIndex].view.bottom; i < rows; i+= 1){
@@ -270,8 +270,8 @@ WW.Components.Map = class Map{
     return 'white';
   }
 
-  printUnits(){
-    this.teams.map(team => team.units.forEach(unit => unit.draw(unit.position.x, unit.position.y)));
+  teamDraw(){
+    this.teams.forEach(team => team.draw());
   }
 
   nextTurn(){
@@ -300,24 +300,27 @@ WW.Components.Map = class Map{
   }
 
   createUnit(e){
+    let {x, y} = this.cameras[this.selectedCameraIndex].position;
+    let team = this.teams[this.teamTurnIndex];
     let id = +e.target.parentNode.id.replace(/[^\d]/g, '');
     let base = e.target.parentNode.id.split('-')[0];
-    let cost;
+    let cost = +e.target.parentNode.children[0].innerText;
+    let unit;
     switch(base){
       case 'air':
         WW.Controllers.Keyboard.toggleAirMenu();
         switch(id){
           case 1:
-
+            unit = this.addUnit(new WW.Data.Units.Fighter(x, y, team.name));
           break;
           case 2:
-
+            unit = this.addUnit(new WW.Data.Units.Bomber(x, y, team.name));
           break;
           case 3:
-
+            unit = this.addUnit(new WW.Data.Units.BCopter(x, y, team.name));
           break;
           case 4:
-
+            unit = this.addUnit(new WW.Data.Units.TCopter(x, y, team.name));
           break;
         }
       break;
@@ -325,16 +328,37 @@ WW.Components.Map = class Map{
         WW.Controllers.Keyboard.toggleBaseMenu();
         switch(id){
           case 1:
-
+            unit = this.addUnit(new WW.Data.Units.Infantry(x, y, team.name));
           break;
           case 2:
-
+            unit = this.addUnit(new WW.Data.Units.Mech(x, y, team.name));
           break;
           case 3:
-
+            unit = this.addUnit(new WW.Data.Units.Recon(x, y, team.name));
           break;
           case 4:
-
+            unit = this.addUnit(new WW.Data.Units.Tank(x, y, team.name));
+          break;
+          case 5:
+            unit = this.addUnit(new WW.Data.Units.MediumTank(x, y, team.name));
+          break;
+          case 6:
+            unit = this.addUnit(new WW.Data.Units.NeoTank(x, y, team.name));
+          break;
+          case 7:
+            unit = this.addUnit(new WW.Data.Units.APC(x, y, team.name));
+          break;
+          case 8:
+            unit = this.addUnit(new WW.Data.Units.Artillery(x, y, team.name));
+          break;
+          case 9:
+            unit = this.addUnit(new WW.Data.Units.Rockets(x, y, team.name));
+          break;
+          case 10:
+            unit = this.addUnit(new WW.Data.Units.AntiAir(x, y, team.name));
+          break;
+          case 11:
+            unit = this.addUnit(new WW.Data.Units.Missiles(x, y, team.name));
           break;
         }
       break;
@@ -342,21 +366,29 @@ WW.Components.Map = class Map{
         WW.Controllers.Keyboard.togglePortMenu();
         switch(id){
           case 1:
-
+            unit = this.addUnit(new WW.Data.Units.Battleship(x, y, team.name));
           break;
           case 2:
-
+            unit = this.addUnit(new WW.Data.Units.Cruiser(x, y, team.name));
           break;
           case 3:
-
+            unit = this.addUnit(new WW.Data.Units.Lander(x, y, team.name));
           break;
           case 4:
-
+            unit = this.addUnit(new WW.Data.Units.Submarine(x, y, team.name));
           break;
         }
       break;
     }
+    unit.used = true;
+    team.funds -= cost;
+    this.loadTeamPanel();
+  }
 
+  addUnit(unitClass){
+    let thisTeam = this.teams[this.teamTurnIndex];
+    thisTeam.units.push(unitClass);
+    return thisTeam.units[thisTeam.units.length - 1];
   }
   
 };
