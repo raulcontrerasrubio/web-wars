@@ -7,7 +7,7 @@ WW.Components.Map = class Map{
     this.teamTurnIndex = 0;
     this.buildings = [...grid.buildings];
     this.day = 1;
-    // {type,team,capture,position (x,y)}
+    document.querySelector('#next-turn').onclick = this.nextTurn.bind(this);
   }
   tileExists(x, y){
     try{
@@ -273,6 +273,18 @@ WW.Components.Map = class Map{
       }
     }
     return 'white';
+  }
+
+  nextTurn(){
+    WW.Controllers.Keyboard.toggleRightMenu();
+    this.teamTurnIndex++;
+    if(this.teamTurnIndex > this.teams.length - 1){
+      this.teamTurnIndex = 0;
+      this.day++;
+      console.log('Turn:', this.teams[this.teamTurnIndex].name, 'Day:', this.day);
+    }else{
+      console.log('Turn:', this.teams[this.teamTurnIndex].name, 'Day:', this.day);
+    }
   }
 
 };

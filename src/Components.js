@@ -2,7 +2,7 @@ WW.Components = {
   maps: null,
   selectedMapIndex: null,
   init: function(){
-    this.maps = [new this.Map(WW.Data.Layouts.test, ['red', 'black'])];
+    this.maps = [new this.Map(WW.Data.Layouts.test, [new WW.Components.Team('red'), new WW.Components.Team('black')])];
     this.selectedMapIndex = 0;
   },
   move: function(){

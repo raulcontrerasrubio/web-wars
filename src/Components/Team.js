@@ -1,5 +1,9 @@
 WW.Components.Team = class Team{
-  constructor(units = []){
+  constructor(name, units = []){
+    this.name = name;
     this.units = units;
+  }
+  endTurn(){
+    WW.Components.maps[WW.Components.getCurrentMap()].nextTurn();
   }
 };

@@ -10,6 +10,8 @@ const WW = {
   h2: null,
   frameCount: null,
   frameID: null,
+  started: false,
+  visibleRightMenu: false,
   setFullScreen: function(){
     this.w = window.innerWidth;
     this.h = window.innerHeight;
@@ -25,15 +27,18 @@ const WW = {
       this.frameCount = 1;
     }
   },
-  startGame: function(){
+  mainScreen: function(){
     this.gb = document.querySelector('#game-board');
     this.canvas = document.querySelector('#canvas');
     this.ctx = this.canvas.getContext('2d');
     this.setFullScreen();
     this.frameCount = 0;
-
     this.Data.init();
     this.Controllers.init();
+    document.querySelector('#start-game').onclick = this.startGame.bind(this);
+  },
+  startGame: function(){
+    document.querySelector('#main-screen').style.display = 'none';
     this.Components.init();
 
     this.gameLoop();
