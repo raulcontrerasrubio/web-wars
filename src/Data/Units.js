@@ -172,4 +172,15 @@ WW.Data.Units = {
       }
     },
   },
+  getDamage: function(attacker, defender){
+    // Get which DamageChart use
+
+    // Get the used ammo
+
+    // Get the damage the attacker does to the defender
+
+    // Get the counterattack damage if range = 1
+
+
+  }
 };

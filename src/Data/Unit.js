@@ -126,4 +126,12 @@ WW.Data.Unit = class Unit{
     }
     WW.Controllers.Keyboard.toggleActionsMenu();
   }
-}
+
+  attack(unit){
+    let damage = WW.Data.Units.getDamage(this, unit);
+    unit.health -= damage;
+    this.getIntegerHealthPoints();
+    unit.getIntegerHealthPoints();
+    WW.Controllers.Keyboard.toggleActionsMenu();
+  }
+};

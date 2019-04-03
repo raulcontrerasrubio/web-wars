@@ -230,6 +230,34 @@ WW.Controllers.Keyboard = {
       document.querySelector('#action-2').onclick = unit.capture.bind(unit);
     }
 
+    let attacableCells = [];
+    for(let range of unit.range){
+      let unit;
+      unit = map.getUnitAt(cameraPosition.x-range, cameraPosition.y)
+      if(unit && unit.team !== map.teams[map.teamTurnIndex].name){
+        attacableCells.push(unit);
+      }
+      unit = map.getUnitAt(cameraPosition.x+range, cameraPosition.y)
+      if(unit && unit.team !== map.teams[map.teamTurnIndex].name){
+        attacableCells.push(unit);
+      }
+      unit = map.getUnitAt(cameraPosition.x, cameraPosition.y-range)
+      if(unit && unit.team !== map.teams[map.teamTurnIndex].name){
+        attacableCells.push(unit);
+      }
+      unit = map.getUnitAt(cameraPosition.x, cameraPosition.y+range)
+      if(unit && unit.team !== map.teams[map.teamTurnIndex].name){
+        attacableCells.push(unit);
+      }
+    }
+
+    if(attacableCells.length > 0){
+      document.querySelector('#action-1').style.display = 'block';
+      document.querySelector('#action-1').onclick = unit.attack.bind(unit, attacableCells[Math.floor(Math.random()*attacableCells.length)]);
+    }
+
+
+
     document.querySelector('#action-4').onclick = unit.wait.bind(unit);
 
   },
