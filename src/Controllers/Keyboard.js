@@ -93,10 +93,12 @@ WW.Controllers.Keyboard = {
           break;
           case this.validKeys.KEY_Z.code:
             camera.zoom -= 5;
+            camera.updateView();
             this.validKeys.KEY_Z.pressed = false;
           break;
           case this.validKeys.KEY_X.code:
             camera.zoom += 5;
+            camera.updateView();
             this.validKeys.KEY_X.pressed = false;
           break;
         }

@@ -14,7 +14,7 @@ WW.Components.Camera = class Camera{
       right: false,
     };
     this.view = {top: null, bottom: null, left: null, right: null};
-    this.zoom = 150;
+    this.zoom = 100;
     this.gridDimensions = gridDimensions;
     this.updateView();
   }
