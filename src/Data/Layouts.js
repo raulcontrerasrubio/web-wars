@@ -173,7 +173,7 @@ WW.Data.Layouts = {
     ],
     // units: [
     //   new WW.Components.Team('blue', [
-    //     new WW.Data.Units.Infantry(5, 2, 'blue'),
+    //     new WW.Data.Units.Infantry(4, 1, 'blue'),
     //     new WW.Data.Units.Mech(6, 8, 'blue'),
     //     new WW.Data.Units.APC(6, 9, 'blue'),
     //     new WW.Data.Units.Recon(12, 9, 'blue'),
@@ -190,7 +190,7 @@ WW.Data.Layouts = {
     //     new WW.Data.Units.TCopter(12, 1, 'blue'),
     //     new WW.Data.Units.Battleship(18, 9, 'blue'),
     //     new WW.Data.Units.Cruiser(20, 15, 'blue'),
-    //     new WW.Data.Units.Lander(28, 13, 'blue'),
+    //     new WW.Data.Units.Lander(28, 14, 'blue'),
     //     new WW.Data.Units.Submarine(28, 18, 'blue'),
     //   ]),
     //   new WW.Components.Team('red', [
@@ -240,7 +240,7 @@ WW.Data.Layouts = {
     //     new WW.Data.Units.Mech(41, 15, 'yellow'),
     //     new WW.Data.Units.APC(47, 9, 'yellow'),
     //     new WW.Data.Units.Recon(2, 12, 'yellow'),
-    //     new WW.Data.Units.Tank(8, 18, 'yellow'),
+    //     new WW.Data.Units.Tank(10, 22, 'yellow'),
     //     new WW.Data.Units.MediumTank(13, 12, 'yellow'),
     //     new WW.Data.Units.NeoTank(15, 9, 'yellow'),
     //     new WW.Data.Units.AntiAir(16, 13, 'yellow'),
@@ -256,7 +256,28 @@ WW.Data.Layouts = {
     //     new WW.Data.Units.Lander(24, 18, 'yellow'),
     //     new WW.Data.Units.Submarine(21, 21, 'yellow'),
     //   ]),
-    // ]
+    //   new WW.Components.Team('black', [
+    //     new WW.Data.Units.Infantry(5, 2, 'black'),
+    //     new WW.Data.Units.Mech(4, 7, 'black'),
+    //     new WW.Data.Units.APC(43, 26, 'black'),
+    //     new WW.Data.Units.Recon(41, 19, 'black'),
+    //     new WW.Data.Units.Tank(35, 19, 'black'),
+    //     new WW.Data.Units.MediumTank(46, 9, 'black'),
+    //     new WW.Data.Units.NeoTank(3, 7, 'black'),
+    //     new WW.Data.Units.AntiAir(2, 1, 'black'),
+    //     new WW.Data.Units.Artillery(0, 10, 'black'),
+    //     new WW.Data.Units.Rockets(0, 27, 'black'),
+    //     new WW.Data.Units.Missiles(4, 19, 'black'),
+    //     new WW.Data.Units.Fighter(19, 13, 'black'),
+    //     new WW.Data.Units.Bomber(21, 20, 'black'),
+    //     new WW.Data.Units.BCopter(14, 13, 'black'),
+    //     new WW.Data.Units.TCopter(28, 19, 'black'),
+    //     new WW.Data.Units.Battleship(24, 14, 'black'),
+    //     new WW.Data.Units.Cruiser(27, 10, 'black'),
+    //     new WW.Data.Units.Lander(25, 20, 'black'),
+    //     new WW.Data.Units.Submarine(19, 21, 'black'),
+    //   ]),
+    // ],
   },
   unitTest: {
     grid: [

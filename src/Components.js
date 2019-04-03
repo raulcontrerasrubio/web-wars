@@ -21,7 +21,7 @@ WW.Components = {
         new WW.Data.Units.TCopter(12, 1, 'blue'),
         new WW.Data.Units.Battleship(18, 9, 'blue'),
         new WW.Data.Units.Cruiser(20, 15, 'blue'),
-        new WW.Data.Units.Lander(28, 13, 'blue'),
+        new WW.Data.Units.Lander(28, 14, 'blue'),
         new WW.Data.Units.Submarine(28, 18, 'blue'),
       ]),
       new WW.Components.Team('red', [
@@ -98,7 +98,7 @@ WW.Components = {
         new WW.Data.Units.AntiAir(2, 1, 'black'),
         new WW.Data.Units.Artillery(0, 10, 'black'),
         new WW.Data.Units.Rockets(0, 27, 'black'),
-        new WW.Data.Units.Missiles(5, 19, 'black'),
+        new WW.Data.Units.Missiles(4, 19, 'black'),
         new WW.Data.Units.Fighter(19, 13, 'black'),
         new WW.Data.Units.Bomber(21, 20, 'black'),
         new WW.Data.Units.BCopter(14, 13, 'black'),
