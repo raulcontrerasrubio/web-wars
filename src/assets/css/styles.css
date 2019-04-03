@@ -156,7 +156,12 @@ h6{
 }
 
 .unit.action{
+  display: none;
   padding: 1rem .5rem;
+}
+
+.unit.action:last-child{
+  display: block;
 }
 
 #base-menu{

@@ -3,6 +3,7 @@ WW.Components.Team = class Team{
     this.name = name;
     this.units = [...units];
     this.funds = 7000;
+    this.selectedUnit = null;
   }
   endTurn(){
     WW.Components.maps[WW.Components.getCurrentMap()].nextTurn();

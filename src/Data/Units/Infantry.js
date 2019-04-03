@@ -41,4 +41,10 @@ WW.Data.Units.Infantry = class Infantry extends WW.Data.Unit{
     WW.ctx.font = '6px Arial';
     WW.ctx.fillText(`C`, WW.Config.TILE_WIDTH - 5, WW.Config.TILE_HEIGHT);
   }
+
+  capture(){
+    console.log('Capturing');
+    this.printCapture();
+    WW.Controllers.Keyboard.toggleActionsMenu();
+  }
 };

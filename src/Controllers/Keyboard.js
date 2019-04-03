@@ -62,30 +62,31 @@ WW.Controllers.Keyboard = {
   cameraControls: function(){0
     let map = WW.Components.maps[WW.Components.selectedMapIndex];
     let camera = map.cameras[map.selectedCameraIndex];
+    let canMove = !WW.visibleRightMenu && !WW.visibleBaseMenu && !WW.visibleAirMenu && !WW.visiblePortMenu && !WW.visibleActionsMenu;
     
     for(let key in this.validKeys){
       if(this.validKeys[key].pressed){
         switch(this.validKeys[key].code){
           case this.validKeys.UP_ARROW.code:
-            if(!WW.visibleRightMenu && !WW.visibleBaseMenu && !WW.visibleAirMenu && !WW.visiblePortMenu){
+            if(canMove){
               camera.moveUp();
               this.validKeys.UP_ARROW.pressed = false;
             }
           break;
           case this.validKeys.DOWN_ARROW.code:
-            if(!WW.visibleRightMenu && !WW.visibleBaseMenu && !WW.visibleAirMenu && !WW.visiblePortMenu){
+            if(canMove){
               camera.moveDown();
               this.validKeys.DOWN_ARROW.pressed = false;
             }
           break;
           case this.validKeys.RIGHT_ARROW.code:
-            if(!WW.visibleRightMenu && !WW.visibleBaseMenu && !WW.visibleAirMenu && !WW.visiblePortMenu){
+            if(canMove){
               camera.moveRight();
               this.validKeys.RIGHT_ARROW.pressed = false;
             }
           break;
           case this.validKeys.LEFT_ARROW.code:
-            if(!WW.visibleRightMenu && !WW.visibleBaseMenu && !WW.visibleAirMenu && !WW.visiblePortMenu){
+            if(canMove){
               camera.moveLeft();
               this.validKeys.LEFT_ARROW.pressed = false;
             }
@@ -104,25 +105,39 @@ WW.Controllers.Keyboard = {
   },
   menuControls: function(){
     let map = WW.Components.maps[WW.Components.selectedMapIndex];
-    let cameraPosition = {x:map.cameras[map.selectedCameraIndex].position.x/16, y:map.cameras[map.selectedCameraIndex].position.y/16};
+    let cameraPosition = {x:map.cameras[map.selectedCameraIndex].position.x/WW.Config.TILE_WIDTH, y:map.cameras[map.selectedCameraIndex].position.y/WW.Config.TILE_HEIGHT};
+    let canMove = !WW.visibleRightMenu && !WW.visibleBaseMenu && !WW.visibleAirMenu && !WW.visiblePortMenu && !WW.visibleActionsMenu;
+
     for(let key in this.validKeys){
       if(this.validKeys[key].pressed){
         switch(this.validKeys[key].code){
           case this.validKeys.KEY_Q.code:
-            if(!WW.visibleBaseMenu && !WW.visibleAirMenu && !WW.visiblePortMenu){
+            if(canMove){
               this.toggleRightMenu();
             }
             this.validKeys.KEY_Q.pressed = false;
           break;
           case this.validKeys.ENTER_KEY.code:
             let unitAtPosition = map.unitAtPosition(cameraPosition.x, cameraPosition.y);
-            // if(!map.unitSelected && unitAtPosition && unitAtPosition.team === map.teams[map.teamTurnIndex].name && !unitAtPosition.used){
-            //   map.selectUnit(unitAtPosition);
-            // }
-            // if(map.unitSelected && unitAtPosition && unitAtPosition.team === map.teams[map.teamTurnIndex].name){
-            //   map.unselectUnit();
-            // }
-            if(!WW.visibleRightMenu){
+            let team = map.teams[map.teamTurnIndex];
+            let selectedUnit = team.selectedUnit;
+
+            if(selectedUnit){
+              if(unitAtPosition && unitAtPosition.team === map.teams[map.teamTurnIndex].name){
+                selectedUnit.move(cameraPosition.x, cameraPosition.y);
+              }else{
+                if(selectedUnit.canMoveTo(cameraPosition.x, cameraPosition.y)){
+                  selectedUnit.move(cameraPosition.x, cameraPosition.y);
+                }
+                map.unselectUnit();
+              }
+            }else{
+              if(unitAtPosition && unitAtPosition.team === map.teams[map.teamTurnIndex].name && !unitAtPosition.used){
+                map.selectUnit(unitAtPosition);
+              }
+            }
+
+            if(!WW.visibleRightMenu && !WW.visibleActionsMenu){
               let currentTurnTeamName = map.teams[map.teamTurnIndex].name;
               switch(map.grid.grid[cameraPosition.y][cameraPosition.x]){
                 case 10:
@@ -196,13 +211,32 @@ WW.Controllers.Keyboard = {
     if(WW.visibleActionsMenu){
       actionsMenu.style.display = 'none';
       WW.visibleActionsMenu = false;
+      this.changeActionableActionsOff();
     }else{
       actionsMenu.style.display = 'flex';
       WW.visibleActionsMenu = true;
+      this.changeActionableActions();
     }
   },
   changeActionableActions: function(){
+    let map = WW.Components.maps[WW.Components.selectedMapIndex];
+    let cameraPosition = {x:map.cameras[map.selectedCameraIndex].position.x/WW.Config.TILE_WIDTH, y:map.cameras[map.selectedCameraIndex].position.y/WW.Config.TILE_HEIGHT};
 
+    let unit = map.unitAtPosition(cameraPosition.x, cameraPosition.y);
+    let onBuilding = map.buildings.filter(building => (building.position.x === unit.position.x && building.position.y === unit.position.y));
+
+    if(unit.canCapture && onBuilding.length > 0 && onBuilding[0].team !== map.teams[map.teamTurnIndex].name){
+      document.querySelector('#action-2').style.display = 'block';
+      document.querySelector('#action-2').onclick = unit.capture.bind(unit);
+    }
+
+    document.querySelector('#action-4').onclick = unit.wait.bind(unit);
+
+  },
+  changeActionableActionsOff: function(){
+    document.querySelector('#action-1').style.display = 'none';
+    document.querySelector('#action-2').style.display = 'none';
+    // document.querySelector('#action-3').style.display = 'none';
   },
   changeAffordableUnits: function(){
     let map = WW.Components.maps[WW.Components.selectedMapIndex];

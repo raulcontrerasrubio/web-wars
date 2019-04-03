@@ -44,8 +44,11 @@ WW.Data.Unit = class Unit{
   getIntegerHealthPoints(){
     return Math.ceil(this.health/10);
   }
-  move(){
-
+  move(x, y){
+    this.position.x = x;
+    this.position.y = y;
+    WW.Controllers.Keyboard.toggleActionsMenu(x, y);
+    this.used = true;
   }
   draw(){
     let img = this.image;
@@ -80,5 +83,19 @@ WW.Data.Unit = class Unit{
     WW.ctx.fillStyle = 'white';
     WW.ctx.font = '6px Arial';
     WW.ctx.fillText(`${this.getIntegerHealthPoints()}`, 0, WW.Config.TILE_HEIGHT);
+  }
+
+  wait(){
+    this.used = true;
+    WW.Controllers.Keyboard.toggleActionsMenu();
+  }
+
+  canMoveTo(x, y){
+    let map = WW.Components.maps[WW.Components.selectedMapIndex];
+    let isFreeCell = map.teams.map(team => team.units.filter(unit => unit.position.x === x && unit.position.y === y).length === 0).every(a => a);
+
+    let xMovement = Math.abs(this.position.x - x);
+    let yMovement = Math.abs(this.position.y - y);
+    return this.movement - xMovement - yMovement > 0 && isFreeCell;
   }
 }

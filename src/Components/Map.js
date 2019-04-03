@@ -7,7 +7,6 @@ WW.Components.Map = class Map{
     this.teamTurnIndex = 0;
     this.buildings = [...grid.buildings];
     this.day = 1;
-    this.unitSelected = null;
     this.loadTeamPanel();
     this.loadEvents();
   }
@@ -277,6 +276,12 @@ WW.Components.Map = class Map{
 
   nextTurn(){
     WW.Controllers.Keyboard.toggleRightMenu();
+    this.teams[this.teamTurnIndex].units.forEach(unit => {
+      unit.used = false
+      if(unit.isCapturing){
+        unit.isCapturing = false;
+      }
+    });
     this.teamTurnIndex++;
     if(this.teamTurnIndex > this.teams.length - 1){
       this.teams.forEach(team => {
@@ -399,13 +404,11 @@ WW.Components.Map = class Map{
   }
 
   selectUnit(unit){
-    this.unitSelected = unit;
-    console.log('Seleccionado');
+    this.teams[this.teamTurnIndex].selectedUnit = unit;
   }
 
   unselectUnit(){
-    this.unitSelected = null;
-    console.log('Deseleccionado');
+    this.teams[this.teamTurnIndex].selectedUnit = null;
   }
   
 };
