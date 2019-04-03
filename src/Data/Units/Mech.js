@@ -35,19 +35,4 @@ WW.Data.Units.Mech = class Mech extends WW.Data.Unit{
     this.canCapture = true;
     this.isCapturing = false;
   }
-  printCapture(){
-    WW.ctx.save();
-    WW.ctx.translate(this.position.x*WW.Config.TILE_WIDTH, this.position.y*WW.Config.TILE_HEIGHT);
-    WW.ctx.fillStyle = 'black';
-    WW.ctx.fillRect(WW.Config.TILE_WIDTH - 5, WW.Config.TILE_HEIGHT - 5, 5, 5);
-    WW.ctx.fillStyle = 'white';
-    WW.ctx.font = '6px Arial';
-    WW.ctx.fillText(`C`, WW.Config.TILE_WIDTH - 5, WW.Config.TILE_HEIGHT);
-    WW.ctx.restore();
-  }
-
-  capture(){
-    this.isCapturing = true;
-    WW.Controllers.Keyboard.toggleActionsMenu();
-  }
 };

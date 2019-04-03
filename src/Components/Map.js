@@ -405,10 +405,31 @@ WW.Components.Map = class Map{
 
   selectUnit(unit){
     this.teams[this.teamTurnIndex].selectedUnit = unit;
+    return this.teams[this.teamTurnIndex].selectedUnit;
   }
 
   unselectUnit(){
     this.teams[this.teamTurnIndex].selectedUnit = null;
+  }
+
+  getBuildingAt(x, y){
+    for(let building of this.buildings){
+      if(building.position.x === x && building.position.y === y){
+        return building;
+      }
+    }
+    return false;
+  }
+
+  getUnitAt(x, y){
+    for(let team of this.teams){
+      for(let unit of team.units){
+        if(unit.position.x === x && unit.position.y === y){
+          return unit;
+        }
+      }
+    }
+    return false;
   }
   
 };

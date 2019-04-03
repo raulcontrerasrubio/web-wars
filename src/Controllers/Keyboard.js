@@ -129,15 +129,15 @@ WW.Controllers.Keyboard = {
                 if(selectedUnit.canMoveTo(cameraPosition.x, cameraPosition.y)){
                   selectedUnit.move(cameraPosition.x, cameraPosition.y);
                 }
-                map.unselectUnit();
               }
+              map.unselectUnit();
             }else{
               if(unitAtPosition && unitAtPosition.team === map.teams[map.teamTurnIndex].name && !unitAtPosition.used){
-                map.selectUnit(unitAtPosition);
+                selectedUnit = map.selectUnit(unitAtPosition);
               }
             }
 
-            if(!WW.visibleRightMenu && !WW.visibleActionsMenu){
+            if(!WW.visibleRightMenu && !WW.visibleActionsMenu && !selectedUnit && !map.getUnitAt(cameraPosition.x, cameraPosition.y)){
               let currentTurnTeamName = map.teams[map.teamTurnIndex].name;
               switch(map.grid.grid[cameraPosition.y][cameraPosition.x]){
                 case 10:

@@ -64,5 +64,11 @@ const WW = {
   drawAll: function(){
     this.Controllers.draw();
     this.Components.draw();
+  },
+  endGame: function(){
+    cancelAnimationFrame(this.frameID);
+    this.gb.style.display = 'none';
+    document.querySelector('#main-screen').style.display = 'flex';
+    window.location.reload();
   }
 };

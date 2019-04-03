@@ -93,9 +93,37 @@ WW.Data.Unit = class Unit{
   canMoveTo(x, y){
     let map = WW.Components.maps[WW.Components.selectedMapIndex];
     let isFreeCell = map.teams.map(team => team.units.filter(unit => unit.position.x === x && unit.position.y === y).length === 0).every(a => a);
-
     let xMovement = Math.abs(this.position.x - x);
     let yMovement = Math.abs(this.position.y - y);
-    return this.movement - xMovement - yMovement > 0 && isFreeCell;
+    return this.movement - xMovement - yMovement >= 0 && isFreeCell;
+  }
+
+  printCapture(){
+    WW.ctx.save();
+    WW.ctx.translate(this.position.x*WW.Config.TILE_WIDTH, this.position.y*WW.Config.TILE_HEIGHT);
+    WW.ctx.fillStyle = 'black';
+    WW.ctx.fillRect(WW.Config.TILE_WIDTH - 5, WW.Config.TILE_HEIGHT - 5, 5, 5);
+    WW.ctx.fillStyle = 'white';
+    WW.ctx.font = '6px Arial';
+    WW.ctx.fillText(`C`, WW.Config.TILE_WIDTH - 5, WW.Config.TILE_HEIGHT);
+    WW.ctx.restore();
+  }
+
+  capture(){
+    this.isCapturing = true;
+    let mapIndex = WW.Components.selectedMapIndex;
+    let building = WW.Components.maps[mapIndex].getBuildingAt(this.position.x, this.position.y);
+    building.capture -= this.getIntegerHealthPoints();
+    if(building.capture <= 0){
+      building.team = this.team;
+      building.capture = 20;
+      if(building instanceof WW.Data.Buildings.HQ){
+        setTimeout(function(){
+          alert(`The ${this.team} team has won!`);
+          WW.endGame();
+        }.bind(this), 500);
+      }
+    }
+    WW.Controllers.Keyboard.toggleActionsMenu();
   }
 }
