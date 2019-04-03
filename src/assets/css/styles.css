@@ -146,6 +146,19 @@ h6{
   padding: 1rem 2rem;
 }
 
+#actions-panel{
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 1rem;
+  left: 5rem;
+  height: auto;
+}
+
+.unit.action{
+  padding: 1rem .5rem;
+}
+
 #base-menu{
   display: none;
 }

@@ -59,7 +59,7 @@ WW.Controllers.Keyboard = {
     this.cameraControls();
     this.menuControls();
   },
-  cameraControls: function(){
+  cameraControls: function(){0
     let map = WW.Components.maps[WW.Components.selectedMapIndex];
     let camera = map.cameras[map.selectedCameraIndex];
     
@@ -115,6 +115,13 @@ WW.Controllers.Keyboard = {
             this.validKeys.KEY_Q.pressed = false;
           break;
           case this.validKeys.ENTER_KEY.code:
+            let unitAtPosition = map.unitAtPosition(cameraPosition.x, cameraPosition.y);
+            // if(!map.unitSelected && unitAtPosition && unitAtPosition.team === map.teams[map.teamTurnIndex].name && !unitAtPosition.used){
+            //   map.selectUnit(unitAtPosition);
+            // }
+            // if(map.unitSelected && unitAtPosition && unitAtPosition.team === map.teams[map.teamTurnIndex].name){
+            //   map.unselectUnit();
+            // }
             if(!WW.visibleRightMenu){
               let currentTurnTeamName = map.teams[map.teamTurnIndex].name;
               switch(map.grid.grid[cameraPosition.y][cameraPosition.x]){
@@ -183,6 +190,19 @@ WW.Controllers.Keyboard = {
       portMenu.style.display = 'flex';
       WW.visiblePortMenu = true;
     }
+  },
+  toggleActionsMenu: function(){
+    let actionsMenu = document.querySelector('#actions-panel');
+    if(WW.visibleActionsMenu){
+      actionsMenu.style.display = 'none';
+      WW.visibleActionsMenu = false;
+    }else{
+      actionsMenu.style.display = 'flex';
+      WW.visibleActionsMenu = true;
+    }
+  },
+  changeActionableActions: function(){
+
   },
   changeAffordableUnits: function(){
     let map = WW.Components.maps[WW.Components.selectedMapIndex];

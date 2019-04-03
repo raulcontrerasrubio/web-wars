@@ -54,13 +54,17 @@ WW.Data.Unit = class Unit{
     var posY = y * WW.Config.TILE_HEIGHT;
     var posX = x * WW.Config.TILE_WIDTH;
     WW.ctx.save();
-    WW.ctx.translate(x, y);
     if(this.used){
-      WW.ctx.filter = 'saturate(30%)'
+      WW.ctx.filter = 'saturate(30%)';
     }
     if(this.getIntegerHealthPoints() < 10){
       this.printDamage();
     }
+
+    if(this.canCapture && this.isCapturing){
+      this.printCapture();
+    }
+
     if(!this.viewRight){
       WW.ctx.scale(-1, 1);
     }

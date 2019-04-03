@@ -3,10 +3,11 @@ WW.Components.Map = class Map{
     this.grid = grid;
     this.cameras = [new WW.Components.Camera({rows: this.grid.grid.length, cols: this.grid.grid[0].length})];
     this.selectedCameraIndex = 0;
-    this.teams = teams;
+    this.teams = [...teams];
     this.teamTurnIndex = 0;
     this.buildings = [...grid.buildings];
     this.day = 1;
+    this.unitSelected = null;
     this.loadTeamPanel();
     this.loadEvents();
   }
@@ -311,16 +312,16 @@ WW.Components.Map = class Map{
         WW.Controllers.Keyboard.toggleAirMenu();
         switch(id){
           case 1:
-            unit = this.addUnit(new WW.Data.Units.Fighter(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.Fighter(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
           case 2:
-            unit = this.addUnit(new WW.Data.Units.Bomber(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.Bomber(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
           case 3:
-            unit = this.addUnit(new WW.Data.Units.BCopter(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.BCopter(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
           case 4:
-            unit = this.addUnit(new WW.Data.Units.TCopter(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.TCopter(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
         }
       break;
@@ -328,37 +329,37 @@ WW.Components.Map = class Map{
         WW.Controllers.Keyboard.toggleBaseMenu();
         switch(id){
           case 1:
-            unit = this.addUnit(new WW.Data.Units.Infantry(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.Infantry(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
           case 2:
-            unit = this.addUnit(new WW.Data.Units.Mech(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.Mech(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
           case 3:
-            unit = this.addUnit(new WW.Data.Units.Recon(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.Recon(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
           case 4:
-            unit = this.addUnit(new WW.Data.Units.Tank(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.Tank(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
           case 5:
-            unit = this.addUnit(new WW.Data.Units.MediumTank(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.MediumTank(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
           case 6:
-            unit = this.addUnit(new WW.Data.Units.NeoTank(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.NeoTank(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
           case 7:
-            unit = this.addUnit(new WW.Data.Units.APC(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.APC(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
           case 8:
-            unit = this.addUnit(new WW.Data.Units.Artillery(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.Artillery(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
           case 9:
-            unit = this.addUnit(new WW.Data.Units.Rockets(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.Rockets(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
           case 10:
-            unit = this.addUnit(new WW.Data.Units.AntiAir(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.AntiAir(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
           case 11:
-            unit = this.addUnit(new WW.Data.Units.Missiles(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.Missiles(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
         }
       break;
@@ -366,16 +367,16 @@ WW.Components.Map = class Map{
         WW.Controllers.Keyboard.togglePortMenu();
         switch(id){
           case 1:
-            unit = this.addUnit(new WW.Data.Units.Battleship(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.Battleship(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
           case 2:
-            unit = this.addUnit(new WW.Data.Units.Cruiser(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.Cruiser(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
           case 3:
-            unit = this.addUnit(new WW.Data.Units.Lander(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.Lander(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
           case 4:
-            unit = this.addUnit(new WW.Data.Units.Submarine(x, y, team.name));
+            unit = this.addUnit(new WW.Data.Units.Submarine(x/WW.Config.TILE_WIDTH, y/WW.Config.TILE_HEIGHT, team.name));
           break;
         }
       break;
@@ -385,10 +386,26 @@ WW.Components.Map = class Map{
     this.loadTeamPanel();
   }
 
+  unitAtPosition(x, y){
+    let availableUnits = this.teams.map(team => team.units.filter(unit => unit.position.x === x && unit.position.y === y))
+      .filter(team => team.length === 1);
+    return availableUnits[0] ? availableUnits[0][0] : false;
+  }
+
   addUnit(unitClass){
     let thisTeam = this.teams[this.teamTurnIndex];
     thisTeam.units.push(unitClass);
     return thisTeam.units[thisTeam.units.length - 1];
+  }
+
+  selectUnit(unit){
+    this.unitSelected = unit;
+    console.log('Seleccionado');
+  }
+
+  unselectUnit(){
+    this.unitSelected = null;
+    console.log('Deseleccionado');
   }
   
 };

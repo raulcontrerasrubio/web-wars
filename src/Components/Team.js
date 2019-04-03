@@ -1,7 +1,7 @@
 WW.Components.Team = class Team{
   constructor(name, units = []){
     this.name = name;
-    this.units = units;
+    this.units = [...units];
     this.funds = 7000;
   }
   endTurn(){

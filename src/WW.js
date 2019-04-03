@@ -15,6 +15,7 @@ const WW = {
   visibleBaseMenu: false,
   visibleAirMenu: false,
   visiblePortMenu: false,
+  visibleActionsMenu: false,
   setFullScreen: function(){
     this.w = window.innerWidth;
     this.h = window.innerHeight;
