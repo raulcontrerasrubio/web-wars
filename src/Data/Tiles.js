@@ -137,6 +137,7 @@ WW.Data.Tiles = {
         tread: 1,
         air: 1,
       },
+      defense: 4,
     },
     city: {
       id: 9,
@@ -155,6 +156,7 @@ WW.Data.Tiles = {
         tread: 1,
         air: 1,
       },
+      defense: 3,
     },
     base: {
       id: 10,
@@ -173,6 +175,7 @@ WW.Data.Tiles = {
         tread: 1,
         air: 1,
       },
+      defense: 3,
     },
     airport: {
       id: 11,
@@ -191,6 +194,7 @@ WW.Data.Tiles = {
         tread: 1,
         air: 1,
       },
+      defense: 3,
     },
     port: {
       id: 12,
@@ -211,6 +215,7 @@ WW.Data.Tiles = {
         trans: 1,
         air: 1,
       },
+      defense: 3,
     },
     river: {
       id: 13,
@@ -232,6 +237,7 @@ WW.Data.Tiles = {
         mech: 1,
         air: 1,
       },
+      defense: 3,
     },
   },
   getTileById: function(id){

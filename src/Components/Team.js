@@ -8,6 +8,9 @@ WW.Components.Team = class Team{
   endTurn(){
     WW.Components.maps[WW.Components.getCurrentMap()].nextTurn();
   }
+  update(){
+    this.units = this.units.filter(unit => unit.health > 0);
+  }
   draw(){
     this.units.forEach(unit => unit.draw());
   }

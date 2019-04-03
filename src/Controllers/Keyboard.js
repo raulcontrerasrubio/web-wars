@@ -141,7 +141,9 @@ WW.Controllers.Keyboard = {
               let currentTurnTeamName = map.teams[map.teamTurnIndex].name;
               switch(map.grid.grid[cameraPosition.y][cameraPosition.x]){
                 case 10:
-                  if(map.buildings.filter(building => building instanceof WW.Data.Buildings.Base && building.position.x === cameraPosition.x && building.position.y === cameraPosition.y)[0].team === currentTurnTeamName){
+                  if(map.buildings.filter(building => building instanceof WW.Data.Buildings.Base 
+                      && building.position.x === cameraPosition.x 
+                      && building.position.y === cameraPosition.y)[0].team === currentTurnTeamName){
                     this.changeAffordableUnits();
                     this.toggleBaseMenu();
                   }

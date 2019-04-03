@@ -57,6 +57,7 @@ WW.Data.Unit = class Unit{
     var posY = y * WW.Config.TILE_HEIGHT;
     var posX = x * WW.Config.TILE_WIDTH;
     WW.ctx.save();
+    
     if(this.used){
       WW.ctx.filter = 'saturate(30%)';
     }
@@ -78,11 +79,14 @@ WW.Data.Unit = class Unit{
     this.viewRight = !this.viewRight;
   }
   printDamage(){
+    WW.ctx.save();
+    WW.ctx.translate(this.position.x*WW.Config.TILE_WIDTH, this.position.y*WW.Config.TILE_HEIGHT);
     WW.ctx.fillStyle = 'black';
     WW.ctx.fillRect(0, WW.Config.TILE_HEIGHT - 5, 5, 5);
     WW.ctx.fillStyle = 'white';
     WW.ctx.font = '6px Arial';
     WW.ctx.fillText(`${this.getIntegerHealthPoints()}`, 0, WW.Config.TILE_HEIGHT);
+    WW.ctx.restore();
   }
 
   wait(){
@@ -130,8 +134,6 @@ WW.Data.Unit = class Unit{
   attack(unit){
     let damage = WW.Data.Units.getDamage(this, unit);
     unit.health -= damage;
-    this.getIntegerHealthPoints();
-    unit.getIntegerHealthPoints();
     WW.Controllers.Keyboard.toggleActionsMenu();
   }
 };

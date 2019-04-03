@@ -29,6 +29,36 @@ WW.Data.Layouts = {
 
     ],
   },
+  medium: {
+    grid: [
+      //0 1  2  3  4  5  6  7  8  9 10 11 12
+      [0, 0, 0, 0, 0, 0, 0,11, 0, 0, 9, 9, 9,], //0
+      [9, 8,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,], //1
+      [9, 0,10, 0, 0, 9, 9, 0, 0, 0, 0,10, 0,], //2
+      [9, 0,11, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0,], //3
+      [0, 0, 0, 0, 0,10, 0, 0, 0, 0, 0, 0, 0,], //4
+    ],
+    buildings: [
+      new WW.Data.Buildings.HQ(1, 1, 'red'),
+      new WW.Data.Buildings.HQ(11, 3, 'black'),
+      new WW.Data.Buildings.City(0, 1, 'red'),
+      new WW.Data.Buildings.City(0, 2, 'red'),
+      new WW.Data.Buildings.City(0, 3, 'black'),
+      new WW.Data.Buildings.City(10, 0, 'black'),
+      new WW.Data.Buildings.City(11, 0, 'black'),
+      new WW.Data.Buildings.City(12, 0, 'black'),
+      new WW.Data.Buildings.Base(2, 1, 'red'),
+      new WW.Data.Buildings.Base(2, 2, 'red'),
+      new WW.Data.Buildings.Base(11, 2, 'black'),
+      new WW.Data.Buildings.Airport(2, 3, 'red'),
+
+      new WW.Data.Buildings.Airport(7, 0, 'white'),
+      new WW.Data.Buildings.City(6, 2, 'white'),
+      new WW.Data.Buildings.City(5, 2, 'white'),
+      
+      new WW.Data.Buildings.Base(5, 4, 'white'),
+    ],
+  },
   big: {
     grid: [
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -64,182 +94,7 @@ WW.Data.Layouts = {
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           ],
-    buildings: [
-      {
-        team:'red', 
-        position:{x:5,y:1},
-        capture: 20,
-        type: 'hq'
-      },
-      {
-        team:'blue', 
-        position:{x:1,y:28},
-        capture: 20,
-        type: 'hq'
-      },
-      {
-        team:'green', 
-        position:{x:45,y:25},
-        capture: 20,
-        type: 'hq'
-      },
-      {
-        team:'yellow', 
-        position:{x:33,y:10},
-        capture: 20,
-        type: 'hq'
-      },
-      {
-        team:'black', 
-        position:{x:45,y:5},
-        capture: 20,
-        type: 'hq'
-      },
-      {
-        team:'red', 
-        position:{x:4,y:9},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'blue', 
-        position:{x:9,y:22},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'green', 
-        position:{x:10,y:22},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'yellow', 
-        position:{x:33,y:10},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'black', 
-        position:{x:45,y:5},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'red', 
-        position:{x:19,y:8},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'red', 
-        position:{x:5,y:22},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'yellow', 
-        position:{x:7,y:22},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'black', 
-        position:{x:6,y:22},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'red', 
-        position:{x:19,y:8},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'blue', 
-        position:{x:20,y:8},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'green', 
-        position:{x:21,y:8},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'yellow', 
-        position:{x:22,y:8},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'black', 
-        position:{x:23,y:8},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'red', 
-        position:{x:4,y:9},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'blue', 
-        position:{x:5,y:9},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'green', 
-        position:{x:6,y:9},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'yellow', 
-        position:{x:7,y:9},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'black', 
-        position:{x:8,y:9},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'red', 
-        position:{x:43,y:13},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'blue', 
-        position:{x:44,y:13},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'green', 
-        position:{x:45,y:13},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'yellow', 
-        position:{x:46,y:13},
-        capture: 20,
-        type: ''
-      },
-      {
-        team:'black', 
-        position:{x:47,y:13},
-        capture: 20,
-        type: ''
-      },],
-    actors: [{},],  
+    buildings: [],
   }
 
 };

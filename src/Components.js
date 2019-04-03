@@ -2,11 +2,23 @@ WW.Components = {
   maps: null,
   selectedMapIndex: null,
   init: function(){
-    this.maps = [new this.Map(WW.Data.Layouts.test, [new WW.Components.Team('red', [new WW.Data.Units.Infantry(0, 0), new WW.Data.Units.Mech(7, 5)]), new WW.Components.Team('black', [new WW.Data.Units.Infantry(1, 0, 'black'), new WW.Data.Units.Mech(0, 1, 'black'), new WW.Data.Units.Mech(9, 5, 'black')])])];
+    this.maps = [new this.Map(WW.Data.Layouts.medium, [
+      new WW.Components.Team('red', [
+        new WW.Data.Units.Infantry(11, 1, 'red'),
+        new WW.Data.Units.Mech(6, 0, 'red'),
+        new WW.Data.Units.Infantry(0, 3, 'red'),
+        new WW.Data.Units.Recon(6, 4, 'red'),
+      ]),
+      new WW.Components.Team('black', [
+        new WW.Data.Units.Infantry(7, 2, 'black'),
+        new WW.Data.Units.Mech(2, 2, 'black'),
+        new WW.Data.Units.Tank(5, 4, 'black'),
+      ]),
+    ])];
     this.selectedMapIndex = 0;
   },
-  move: function(){
-
+  update: function(){
+    this.maps.forEach(map => map.update());
   },
   draw: function(){
     this.Background.draw();

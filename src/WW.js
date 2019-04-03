@@ -59,7 +59,7 @@ const WW = {
   },
   moveAll: function(){
     this.Controllers.move();
-    this.Components.move();
+    this.Components.update();
   },
   drawAll: function(){
     this.Controllers.draw();

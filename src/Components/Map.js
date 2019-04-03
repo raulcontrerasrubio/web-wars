@@ -17,7 +17,10 @@ WW.Components.Map = class Map{
     }catch(e){
       return false;
     }
-  }; 
+  };
+  update(){
+    this.teams.forEach(team => team.update());
+  } 
   draw(){
     this.cameras[this.selectedCameraIndex].draw(this.printAll.bind(this));
   }

@@ -42,7 +42,7 @@ WW.Data.Units = {
         blue: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/blue-units.png', 0, 0, 16, 18),
         green: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/green-units.png', 16, 0, 16, 18),
         yellow: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/yellow-units.png', 0, 0, 16, 18),
-        black: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/black-units.png', 16, 0, 16, 18),
+        black: new WW.Data.ImageCoord(WW.Config.ROOT + 'assets/sprites/black-units.png', 16, 16, 16, 18),
       }
     },
     mediumTank: {
@@ -173,14 +173,43 @@ WW.Data.Units = {
     },
   },
   getDamage: function(attacker, defender){
+    let chart = null;
     // Get which DamageChart use
+    if(defender instanceof this.Infantry){ chart = attacker.damageChart.infantry; }
+    if(defender instanceof this.Mech){ chart = attacker.damageChart.mech; }
+    if(defender instanceof this.Recon){ chart = attacker.damageChart.recon; }
+    if(defender instanceof this.Tank){ chart = attacker.damageChart.tank; }
+    if(defender instanceof this.MediumTank){ chart = attacker.damageChart.mediumTank; }
+    if(defender instanceof this.NeoTank){ chart = attacker.damageChart.neoTank; }
+    if(defender instanceof this.APC){ chart = attacker.damageChart.apc; }
+    if(defender instanceof this.Artillery){ chart = attacker.damageChart.artillery; }
+    if(defender instanceof this.Rockets){ chart = attacker.damageChart.rockets; }
+    if(defender instanceof this.AntiAir){ chart = attacker.damageChart.antiAir; }
+    if(defender instanceof this.Missiles){ chart = attacker.damageChart.missiles; }
+    if(defender instanceof this.Fighter){ chart = attacker.damageChart.fighter; }
+    if(defender instanceof this.Bomber){ chart = attacker.damageChart.bomber; }
+    if(defender instanceof this.BCopter){ chart = attacker.damageChart.bCopter; }
+    if(defender instanceof this.TCopter){ chart = attacker.damageChart.tCopter; }
+    if(defender instanceof this.Battleship){ chart = attacker.damageChart.battleship; }
+    if(defender instanceof this.Cruiser){ chart = attacker.damageChart.cruiser; }
+    if(defender instanceof this.Lander){ chart = attacker.damageChart.lander; }
+    if(defender instanceof this.Submarine){ chart = attacker.damageChart.submarine; }
 
     // Get the used ammo
+    let baseDamage = 0;
+    if(chart){
+      if(attacker.ammo && chart.damageW1){
+        baseDamage = chart.damageW1;
+      }else{
+        baseDamage = chart.damageW2;
+      }
+    }
 
     // Get the damage the attacker does to the defender
-
-    // Get the counterattack damage if range = 1
-
-
+    let luck = Math.floor(Math.random()*9);
+    let map = WW.Components.getCurrentMap();
+    let defenseProtection = WW.Data.Tiles.getTileById(map.grid.grid[defender.position.y][defender.position.y]).props.defense;
+    let totalDamage = (baseDamage + luck) * attacker.health/100 * ((200 - (100 + defenseProtection*defender.health/10))/100);
+    return totalDamage;
   }
 };
