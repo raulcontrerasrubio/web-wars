@@ -311,9 +311,9 @@ WW.Components.Map = class Map{
   createUnit(e){
     let {x, y} = this.cameras[this.selectedCameraIndex].position;
     let team = this.teams[this.teamTurnIndex];
-    let id = +e.target.parentNode.id.replace(/[^\d]/g, '');
+    let id = !!e.target.parentNode.id.replace(/[^\d]/g, '') ? +e.target.parentNode.id.replace(/[^\d]/g, '') : +e.target.id.replace(/[^\d]/g, '');
     let base = e.target.parentNode.id.split('-')[0];
-    let cost = +e.target.parentNode.children[0].innerText;
+    let cost = !isNaN(+e.target.parentNode.children[0].innerText) ? +e.target.parentNode.children[0].innerText : +e.target.children[0].innerText;
     let unit;
     switch(base){
       case 'air':
