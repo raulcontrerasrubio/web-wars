@@ -5,230 +5,232 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Web Wars</title>
+  <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan" rel="stylesheet">
   <link rel="stylesheet" href="src/assets/css/styles.css">
 </head>
 <body>
-  <!-- A beautiful page with the game within -->
   <div id="game-board">
     <canvas id="canvas">Your browser is not supported!</canvas>
-    <!-- GUI ELEMENTS with class .gui -->
-      <div class="gui" id="main-screen">
-        <h1>Web Wars</h1>
-        <button class="btn" id="start-game">Start Game</button>
-      </div>
-      <div class="gui menu" id="turn-menu">
-        <button class="btn" id="next-turn">Next-turn</button>
-      </div>
-      <div class="gui menu factory" id="base-menu">
-        <div class="unit">
-          <div class="cost">
-            COST
-          </div>
-          <div class="name">
-            NAME
-          </div>
+    <div class="gui" id="main-screen">
+      <h1>Web Wars</h1>
+      <button class="btn" id="start-game">Start Game</button>
+    </div>
+    <div class="gui menu" id="turn-menu">
+      <button class="btn" id="next-turn">Next-turn</button>
+    </div>
+    <div class="gui menu factory" id="base-menu">
+      <div class="unit">
+        <div class="cost">
+          COST
         </div>
-        <div class="unit" id="base-unit-1">
-          <div class="cost">
-            1000
-          </div>
-          <div class="name">
-            Infantry
-          </div>
-        </div>
-        <div class="unit" id="base-unit-2">
-          <div class="cost">
-            3000
-          </div>
-          <div class="name">
-            Mech
-          </div>
-        </div>
-        <div class="unit" id="base-unit-3">
-          <div class="cost">
-            4000
-          </div>
-          <div class="name">
-            Recon
-          </div>
-        </div>
-        <div class="unit" id="base-unit-4">
-          <div class="cost">
-            7000
-          </div>
-          <div class="name">
-            Tank
-          </div>
-        </div>
-        <div class="unit" id="base-unit-5">
-          <div class="cost">
-            16000
-          </div>
-          <div class="name">
-            MediumTank            
-          </div>
-        </div>
-        <div class="unit" id="base-unit-6">
-          <div class="cost">
-            22000
-          </div>
-          <div class="name">
-            NeoTank
-          </div>
-        </div>
-        <div class="unit" id="base-unit-7">
-          <div class="cost">
-            5000
-          </div>
-          <div class="name">
-            APC
-          </div>
-        </div>
-        <div class="unit" id="base-unit-8">
-          <div class="cost">
-            6000
-          </div>
-          <div class="name">
-            Artillery
-          </div>
-        </div>
-        <div class="unit" id="base-unit-9">
-          <div class="cost">
-            15000
-          </div>
-          <div class="name">
-            Rockets
-          </div>
-        </div>
-        <div class="unit" id="base-unit-10">
-          <div class="cost">
-            8000
-          </div>
-          <div class="name">
-            AntiAir
-          </div>
-        </div>
-        <div class="unit" id="base-unit-11">
-          <div class="cost">
-            12000
-          </div>
-          <div class="name">
-            Missiles
-          </div>
+        <div class="name">
+          NAME
         </div>
       </div>
-      <div class="gui menu factory" id="air-menu">
-        <div class="unit">
-          <div class="cost">
-            COST
-          </div>
-          <div class="name">
-            NAME
-          </div>
+      <div class="unit" id="base-unit-1">
+        <div class="cost">
+          1000
         </div>
-        <div class="unit" id="air-unit-1">
-          <div class="cost">
-            20000
-          </div>
-          <div class="name">
-            Fighter
-          </div>
-        </div>
-        <div class="unit" id="air-unit-2">
-          <div class="cost">
-            22000
-          </div>
-          <div class="name">
-            Bomber
-          </div>
-        </div>
-        <div class="unit" id="air-unit-3">
-          <div class="cost">
-            9000
-          </div>
-          <div class="name">
-            BCopter
-          </div>
-        </div>
-        <div class="unit" id="air-unit-4">
-          <div class="cost">
-            5000
-          </div>
-          <div class="name">
-            TCopter
-          </div>
+        <div class="name">
+          Infantry
         </div>
       </div>
-      <div class="gui menu factory" id="port-menu">
-        <div class="unit">
-          <div class="cost">
-            COST
-          </div>
-          <div class="name">
-            NAME
-          </div>
+      <div class="unit" id="base-unit-2">
+        <div class="cost">
+          3000
         </div>
-        <div class="unit" id="port-unit-1">
-          <div class="cost">
-            28000
-          </div>
-          <div class="name">
-            Battleship
-          </div>
-        </div>
-        <div class="unit" id="port-unit-2">
-          <div class="cost">
-            18000
-          </div>
-          <div class="name">
-            Cruiser
-          </div>
-        </div>
-        <div class="unit" id="port-unit-3">
-          <div class="cost">
-            12000
-          </div>
-          <div class="name">
-            Lander
-          </div>
-        </div>
-        <div class="unit" id="port-unit-4">
-          <div class="cost">
-            20000
-          </div>
-          <div class="name">
-            Submarine
-          </div>
+        <div class="name">
+          Mech
         </div>
       </div>
-      <div class="gui menu" id="team-panel">
-        <div>
-          <span>Team:</span> <span id="team-name">Red</span>
+      <div class="unit" id="base-unit-3">
+        <div class="cost">
+          4000
         </div>
-        <div>
-          <span>Funds:</span> <span id="team-funds">0</span>
-        </div>
-        <div>
-          <span>Day:</span> <span id="day">1</span>
+        <div class="name">
+          Recon
         </div>
       </div>
-      <div class="gui menu" id="actions-panel">
-        <div class="unit title">
-          Actions
+      <div class="unit" id="base-unit-4">
+        <div class="cost">
+          7000
         </div>
-        <div class="unit action" id="action-1">
-          Attack
-        </div>
-        <div class="unit action" id="action-2">
-          Capture
-        </div>
-        <!-- <div class="unit action" id="action-3">
-          Move
-        </div> -->
-        <div class="unit action" id="action-4">
-          Wait
+        <div class="name">
+          Tank
         </div>
       </div>
+      <div class="unit" id="base-unit-5">
+        <div class="cost">
+          16000
+        </div>
+        <div class="name">
+          MediumTank            
+        </div>
+      </div>
+      <div class="unit" id="base-unit-6">
+        <div class="cost">
+          22000
+        </div>
+        <div class="name">
+          NeoTank
+        </div>
+      </div>
+      <div class="unit" id="base-unit-7">
+        <div class="cost">
+          5000
+        </div>
+        <div class="name">
+          APC
+        </div>
+      </div>
+      <div class="unit" id="base-unit-8">
+        <div class="cost">
+          6000
+        </div>
+        <div class="name">
+          Artillery
+        </div>
+      </div>
+      <div class="unit" id="base-unit-9">
+        <div class="cost">
+          15000
+        </div>
+        <div class="name">
+          Rockets
+        </div>
+      </div>
+      <div class="unit" id="base-unit-10">
+        <div class="cost">
+          8000
+        </div>
+        <div class="name">
+          AntiAir
+        </div>
+      </div>
+      <div class="unit" id="base-unit-11">
+        <div class="cost">
+          12000
+        </div>
+        <div class="name">
+          Missiles
+        </div>
+      </div>
+    </div>
+    <div class="gui menu factory" id="air-menu">
+      <div class="unit">
+        <div class="cost">
+          COST
+        </div>
+        <div class="name">
+          NAME
+        </div>
+      </div>
+      <div class="unit" id="air-unit-1">
+        <div class="cost">
+          20000
+        </div>
+        <div class="name">
+          Fighter
+        </div>
+      </div>
+      <div class="unit" id="air-unit-2">
+        <div class="cost">
+          22000
+        </div>
+        <div class="name">
+          Bomber
+        </div>
+      </div>
+      <div class="unit" id="air-unit-3">
+        <div class="cost">
+          9000
+        </div>
+        <div class="name">
+          BCopter
+        </div>
+      </div>
+      <div class="unit" id="air-unit-4">
+        <div class="cost">
+          5000
+        </div>
+        <div class="name">
+          TCopter
+        </div>
+      </div>
+    </div>
+    <div class="gui menu factory" id="port-menu">
+      <div class="unit">
+        <div class="cost">
+          COST
+        </div>
+        <div class="name">
+          NAME
+        </div>
+      </div>
+      <div class="unit" id="port-unit-1">
+        <div class="cost">
+          28000
+        </div>
+        <div class="name">
+          Battleship
+        </div>
+      </div>
+      <div class="unit" id="port-unit-2">
+        <div class="cost">
+          18000
+        </div>
+        <div class="name">
+          Cruiser
+        </div>
+      </div>
+      <div class="unit" id="port-unit-3">
+        <div class="cost">
+          12000
+        </div>
+        <div class="name">
+          Lander
+        </div>
+      </div>
+      <div class="unit" id="port-unit-4">
+        <div class="cost">
+          20000
+        </div>
+        <div class="name">
+          Submarine
+        </div>
+      </div>
+    </div>
+    <div class="gui menu" id="team-panel">
+      <div>
+        <span>Team:</span> <span id="team-name">Red</span>
+      </div>
+      <div>
+        <span>Funds:</span> <span id="team-funds">0</span>
+      </div>
+      <div>
+        <span>Day:</span> <span id="day">1</span>
+      </div>
+    </div>
+    <div class="gui menu" id="actions-panel">
+      <div class="unit title">
+        Actions
+      </div>
+      <div class="unit action" id="action-1">
+        Attack
+      </div>
+      <div class="unit action" id="action-2">
+        Capture
+      </div>
+      <!-- <div class="unit action" id="action-3">
+        Move
+      </div> -->
+      <div class="unit action" id="action-4">
+        Wait
+      </div>
+    </div>
+    <div class="gui menu" id="end-game">
+      <h2>The red team has won the game</h2>
+    </div>
   </div>
   <script src="src/WW.js"></script>
   <script src="src/Helpers.js"></script>

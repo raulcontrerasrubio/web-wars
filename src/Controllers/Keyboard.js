@@ -68,25 +68,25 @@ WW.Controllers.Keyboard = {
       if(this.validKeys[key].pressed){
         switch(this.validKeys[key].code){
           case this.validKeys.UP_ARROW.code:
-            if(canMove){
+            if(canMove && !WW.visibleRightMenu){
               camera.moveUp();
               this.validKeys.UP_ARROW.pressed = false;
             }
           break;
           case this.validKeys.DOWN_ARROW.code:
-            if(canMove){
+            if(canMove && !WW.visibleRightMenu){
               camera.moveDown();
               this.validKeys.DOWN_ARROW.pressed = false;
             }
           break;
           case this.validKeys.RIGHT_ARROW.code:
-            if(canMove){
+            if(canMove && !WW.visibleRightMenu){
               camera.moveRight();
               this.validKeys.RIGHT_ARROW.pressed = false;
             }
           break;
           case this.validKeys.LEFT_ARROW.code:
-            if(canMove){
+            if(canMove && !WW.visibleRightMenu){
               camera.moveLeft();
               this.validKeys.LEFT_ARROW.pressed = false;
             }
@@ -108,7 +108,7 @@ WW.Controllers.Keyboard = {
   menuControls: function(){
     let map = WW.Components.maps[WW.Components.selectedMapIndex];
     let cameraPosition = {x:map.cameras[map.selectedCameraIndex].position.x/WW.Config.TILE_WIDTH, y:map.cameras[map.selectedCameraIndex].position.y/WW.Config.TILE_HEIGHT};
-    let canMove = !WW.visibleRightMenu && !WW.visibleBaseMenu && !WW.visibleAirMenu && !WW.visiblePortMenu && !WW.visibleActionsMenu;
+    let canMove = !WW.visibleBaseMenu && !WW.visibleAirMenu && !WW.visiblePortMenu  && !WW.visibleActionsMenu;
 
     for(let key in this.validKeys){
       if(this.validKeys[key].pressed){

@@ -123,8 +123,7 @@ WW.Data.Unit = class Unit{
       building.capture = 20;
       if(building instanceof WW.Data.Buildings.HQ){
         setTimeout(function(){
-          alert(`The ${this.team} team has won!`);
-          WW.endGame();
+          WW.endGame(this.team);
         }.bind(this), 500);
       }
     }

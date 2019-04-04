@@ -65,10 +65,14 @@ const WW = {
     this.Controllers.draw();
     this.Components.draw();
   },
-  endGame: function(){
+  endGame: function(team){
+    let endScreen = document.querySelector('#end-game');
+    let endScreenText = endScreen.querySelector('h2');
     cancelAnimationFrame(this.frameID);
-    this.gb.style.display = 'none';
-    document.querySelector('#main-screen').style.display = 'flex';
-    window.location.reload();
+    endScreen.style.display = 'flex';
+    this.canvas.style.display = 'none';
+    endScreen.style.backgroundColor = team;
+    endScreenText.innerText = `The ${team} team has won the game!`;
+    setTimeout(() => window.location.reload(), 1000);
   }
 };
