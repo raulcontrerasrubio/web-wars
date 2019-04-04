@@ -73,6 +73,6 @@ const WW = {
     this.canvas.style.display = 'none';
     endScreen.style.backgroundColor = team;
     endScreenText.innerText = `The ${team} team has won the game!`;
-    setTimeout(() => window.location.reload(), 1000);
+    setTimeout(() => window.location.reload(), 3000);
   }
 };
