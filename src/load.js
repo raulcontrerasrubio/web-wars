@@ -3,7 +3,7 @@ window.onload = function(){
   window.onresize = function(){
     WW.setFullScreen();
     if(WW.Components && WW.Components.maps && WW.Components.maps.length >= 1){
-      let currentMap = WW.Components.maps[WW.Components.selectedMapIndex]
+      let currentMap = WW.Components.maps[WW.Components.selectedMapIndex];
       currentMap.cameras[currentMap.selectedCameraIndex].updateView();
     }
   };

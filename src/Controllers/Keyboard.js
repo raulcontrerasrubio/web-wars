@@ -59,7 +59,7 @@ WW.Controllers.Keyboard = {
     this.cameraControls();
     this.menuControls();
   },
-  cameraControls: function(){0
+  cameraControls: function(){
     let map = WW.Components.maps[WW.Components.selectedMapIndex];
     let camera = map.cameras[map.selectedCameraIndex];
     let canMove = !WW.visibleRightMenu && !WW.visibleBaseMenu && !WW.visibleAirMenu && !WW.visiblePortMenu && !WW.visibleActionsMenu;
@@ -237,19 +237,19 @@ WW.Controllers.Keyboard = {
     let attacableCells = [];
     for(let range of unit.range){
       let unit;
-      unit = map.getUnitAt(cameraPosition.x-range, cameraPosition.y)
+      unit = map.getUnitAt(cameraPosition.x-range, cameraPosition.y);
       if(unit && unit.team !== map.teams[map.teamTurnIndex].name){
         attacableCells.push(unit);
       }
-      unit = map.getUnitAt(cameraPosition.x+range, cameraPosition.y)
+      unit = map.getUnitAt(cameraPosition.x+range, cameraPosition.y);
       if(unit && unit.team !== map.teams[map.teamTurnIndex].name){
         attacableCells.push(unit);
       }
-      unit = map.getUnitAt(cameraPosition.x, cameraPosition.y-range)
+      unit = map.getUnitAt(cameraPosition.x, cameraPosition.y-range);
       if(unit && unit.team !== map.teams[map.teamTurnIndex].name){
         attacableCells.push(unit);
       }
-      unit = map.getUnitAt(cameraPosition.x, cameraPosition.y+range)
+      unit = map.getUnitAt(cameraPosition.x, cameraPosition.y+range);
       if(unit && unit.team !== map.teams[map.teamTurnIndex].name){
         attacableCells.push(unit);
       }

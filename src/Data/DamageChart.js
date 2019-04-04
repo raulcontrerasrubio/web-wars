@@ -3,4 +3,4 @@ WW.Data.DamageChart = class DamageChart{
     this.damageW1 = damageW1;
     this.damageW2 = damageW2;
   }
-}
+};

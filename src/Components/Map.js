@@ -17,7 +17,7 @@ WW.Components.Map = class Map{
     }catch(e){
       return false;
     }
-  };
+  }
   update(){
     this.teams.forEach(team => team.update());
   } 
@@ -280,7 +280,7 @@ WW.Components.Map = class Map{
   nextTurn(){
     WW.Controllers.Keyboard.toggleRightMenu();
     this.teams[this.teamTurnIndex].units.forEach(unit => {
-      unit.used = false
+      unit.used = false;
       if(unit.isCapturing){
         unit.isCapturing = false;
       }

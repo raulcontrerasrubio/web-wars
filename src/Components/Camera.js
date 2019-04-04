@@ -65,7 +65,7 @@ WW.Components.Camera = class Camera{
       bottom: Math.floor(this.position.y/WW.Config.TILE_HEIGHT) + this.CAMERA_TILES_SIDES_UP_BOTTOM > rows ? rows : Math.floor(this.position.y/WW.Config.TILE_HEIGHT) + this.CAMERA_TILES_SIDES_UP_BOTTOM,
       left: Math.floor(this.position.x/WW.Config.TILE_WIDTH) - this.CAMERA_TILES_SIDES_RIGHT_LEFT < 0 ? 0 : Math.floor(this.position.x/WW.Config.TILE_WIDTH) - this.CAMERA_TILES_SIDES_RIGHT_LEFT,
       right: Math.floor(this.position.x/WW.Config.TILE_WIDTH) + this.CAMERA_TILES_SIDES_RIGHT_LEFT > cols ? cols : Math.round(this.position.x/WW.Config.TILE_WIDTH) + this.CAMERA_TILES_SIDES_RIGHT_LEFT
-    }
+    };
   }
   printPosition(){
     // Top left

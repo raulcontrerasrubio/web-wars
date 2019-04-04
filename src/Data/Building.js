@@ -5,4 +5,4 @@ WW.Data.Building = class Building{
     this.defense = 3;
     this.capture = 20;
   }
-}
+};
